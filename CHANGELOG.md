@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- support for haskell files and hjs files (jsig type definitions)
 
 ## 1.0.0 - 2017-01-19
 ### Added

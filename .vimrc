@@ -34,6 +34,7 @@ Plug 'keith/tmux.vim'
 Plug 'dag/vim-fish'
 Plug 'rust-lang/rust.vim'
 Plug 'chase/vim-ansible-yaml'
+Plug 'neovimhaskell/haskell-vim'
 
 " themes
 Plug 'dracula/vim'
@@ -163,3 +164,6 @@ let delimitMate_expand_cr = 1
 
 " gtm time spend
 let g:gtm_plugin_status_enabled = 1
+
+" use hjs extension with haskell syntax
+au BufNewFile,BufRead *.hjs setlocal ft=haskell
