@@ -25,6 +25,7 @@ Plug 'matze/vim-move'
 Plug 'mileszs/ack.vim', { 'do': 'sudo pacman -S --noconfirm ack' }
 Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
 Plug 'git-time-metric/gtm-vim-plugin'
+Plug 'tpope/vim-unimpaired'
 
 " extra syntax
 Plug 'pangloss/vim-javascript'
