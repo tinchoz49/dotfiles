@@ -87,7 +87,7 @@ nnoremap tk :tabnext<CR>
 nnoremap tj :tabprev<CR>
 nnoremap th :tabfirst<CR>
 nnoremap tl :tablast<CR>
-nnoremap <Leader>s :update<CR>
+nnoremap <C-s> :update<CR>
 nnoremap <Leader>ff :NERDTreeToggle<CR>
 nnoremap <Leader>f<Space> :NERDTreeFind<CR>
 nnoremap <C-b><C-b> :CtrlPBuffer<CR>
