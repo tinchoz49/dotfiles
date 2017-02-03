@@ -90,9 +90,10 @@ nnoremap <Leader>ff :NERDTreeToggle<CR>
 nnoremap <Leader>f<Space> :NERDTreeFind<CR>
 
 " buffer config
-nnoremap <C-b><C-b> :CtrlPBuffer<CR>
+nnoremap <Leader>bb :CtrlPBuffer<CR>
+nnoremap <Leader>p :CtrlP<CR>
 nnoremap <C-n> :bnext<CR>
-nnoremap <S-n> :bprevious<CR>
+nnoremap <C-p> :bprevious<CR>
 nnoremap <C-b><C-w> :bw<CR>
 nnoremap <C-f> :Autoformat<CR>
 nmap <silent> <C-l> <Plug>(jsdoc)
