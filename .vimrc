@@ -1,3 +1,4 @@
+let mapleader=","
 set shell=/bin/bash
 
 call plug#begin('~/.vim/plugged')
@@ -88,6 +89,7 @@ nnoremap tj :tabprev<CR>
 nnoremap th :tabfirst<CR>
 nnoremap tl :tablast<CR>
 nnoremap <C-s> :update<CR>
+inoremap <C-s> <ESC>:update<CR>
 nnoremap <Leader>ff :NERDTreeToggle<CR>
 nnoremap <Leader>f<Space> :NERDTreeFind<CR>
 nnoremap <C-b><C-b> :CtrlPBuffer<CR>
