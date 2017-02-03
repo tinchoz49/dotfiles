@@ -83,21 +83,18 @@ let g:syntastic_check_on_wq = 1
 let g:syntastic_javascript_eslint_exe = 'eslint --quiet'
 let g:syntastic_javascript_checkers = ['eslint']
 
-nnoremap tn :tabnew<Space>
-nnoremap tk :tabnext<CR>
-nnoremap tj :tabprev<CR>
-nnoremap th :tabfirst<CR>
-nnoremap tl :tablast<CR>
 nnoremap <C-s> :update<CR>
 inoremap <C-s> <ESC>:update<CR>
+
 nnoremap <Leader>ff :NERDTreeToggle<CR>
 nnoremap <Leader>f<Space> :NERDTreeFind<CR>
+
+" buffer config
 nnoremap <C-b><C-b> :CtrlPBuffer<CR>
-nnoremap <C-b><C-n> :bn<CR>
+nnoremap <C-n> :bnext<CR>
+nnoremap <S-n> :bprevious<CR>
 nnoremap <C-b><C-w> :bw<CR>
 nnoremap <C-f> :Autoformat<CR>
-inoremap <C-b> <b>
-inoremap <C-l> <right>
 nmap <silent> <C-l> <Plug>(jsdoc)
 nnoremap <Leader>v :SyntasticCheck<CR>
 
