@@ -89,9 +89,11 @@ inoremap <C-s> <ESC>:update<CR>
 nnoremap <Leader>ff :NERDTreeToggle<CR>
 nnoremap <Leader>f<Space> :NERDTreeFind<CR>
 
-" buffer config
 nnoremap <Leader>bb :CtrlPBuffer<CR>
 nnoremap <Leader>p :CtrlP<CR>
+let g:ctrlp_map = '<Leader-p>'
+
+" buffer config
 nnoremap <C-n> :bnext<CR>
 nnoremap <C-p> :bprevious<CR>
 nnoremap <C-b><C-w> :bw<CR>
@@ -168,3 +170,5 @@ let g:gtm_plugin_status_enabled = 1
 
 " use hjs extension with haskell syntax
 au BufNewFile,BufRead *.hjs setlocal ft=haskell
+
+let g:multi_cursor_next_key='<C-d>'
