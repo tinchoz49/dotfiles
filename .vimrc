@@ -82,6 +82,7 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 let g:syntastic_javascript_eslint_exe = 'eslint --quiet'
 let g:syntastic_javascript_checkers = ['eslint']
+let g:formatdef_jsbeautify_javascript = '"js-beautify -a -X -f - -".(&expandtab ? "s ".shiftwidth() : "t").(&textwidth ? " -w ".&textwidth : "")'
 
 nnoremap <C-s> :update<CR>
 inoremap <C-s> <ESC>:update<CR>
