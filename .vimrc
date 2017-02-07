@@ -129,25 +129,17 @@ let g:jsdoc_enable_es6 = 1
 
 " autocomplete stuff
 set completeopt=longest,menuone
-autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
-autocmd FileType javascript setlocal omnifunc=tern#Complete
-augroup omnifunc
-    autocmd!
-    autocmd Filetype *
-            \   if &omnifunc == "" |
-            \       setlocal omnifunc=syntaxcomplete#Complete |
-            \   endif
-    autocmd FileType *
-    \ if &omnifunc != '' |
-    \   call SuperTabChain(&omnifunc, "<c-p>") |
-    \ endif
-augroup END
 let g:SuperTabLongestHighlight = 1
 let g:SuperTabClosePreviewOnPopupClose = 1
 let g:SuperTabLongestEnhanced = 1
-let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
-let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
-let g:SuperTabContextDiscoverDiscovery = ['&omnifunc:<c-x><c-o>', '&completefunc:<c-x><c-u>']
+let g:SuperTabDefaultCompletionType = 'context'
+autocmd FileType javascript setlocal omnifunc=tern#Complete
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+autocmd FileType *
+    \ if &omnifunc != '' |
+    \   call SuperTabChain(&omnifunc, "<c-p>") |
+    \ endif
+
 
 " whitestrip on save
 autocmd BufWritePre * StripWhitespace
