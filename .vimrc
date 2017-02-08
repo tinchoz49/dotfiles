@@ -27,6 +27,7 @@ Plug 'mileszs/ack.vim', { 'do': 'sudo pacman -S --noconfirm ack' }
 Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
 Plug 'git-time-metric/gtm-vim-plugin'
 Plug 'tpope/vim-unimpaired'
+Plug 'svermeulen/vim-easyclip'
 
 " extra syntax
 Plug 'pangloss/vim-javascript'
