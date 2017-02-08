@@ -93,7 +93,7 @@ nnoremap <Leader>f<Space> :NERDTreeFind<CR>
 
 nnoremap <Leader>bb :CtrlPBuffer<CR>
 nnoremap <Leader>p :CtrlP<CR>
-let g:ctrlp_map = '<Leader-p>'
+let g:ctrlp_map = ''
 
 " buffer config
 nnoremap <C-n> :bnext<CR>
