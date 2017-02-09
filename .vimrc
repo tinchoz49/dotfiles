@@ -1,7 +1,7 @@
 let mapleader=","
 set shell=/bin/bash
 
-source ./vim/plug.vim
+source ~/.vim/plug.vim
 
 if (has("termguicolors"))
     set termguicolors
