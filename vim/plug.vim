@@ -15,7 +15,6 @@ Plug 'vim-syntastic/syntastic', { 'do': 'npm install -g resolve-eslint' }
     let g:syntastic_check_on_wq = 1
     let g:syntastic_javascript_eslint_exe = 'eslint --quiet'
     let g:syntastic_javascript_checkers = ['eslint']
-    let g:formatdef_jsbeautify_javascript = '"js-beautify -a -X -f - -".(&expandtab ? "s ".shiftwidth() : "t").(&textwidth ? " -w ".&textwidth : "")'
     nnoremap <Leader>v :SyntasticCheck<CR>
 
 Plug 'tpope/vim-surround'
@@ -91,6 +90,7 @@ Plug 'heavenshell/vim-jsdoc'
 Plug 'ntpeters/vim-better-whitespace'
 
 Plug 'Chiel92/vim-autoformat', { 'do': 'npm install -g js-beautify' }
+    let g:formatdef_jsbeautify_javascript = '"js-beautify -a -X -p -f - -".(&expandtab ? "s ".shiftwidth() : "t").(&textwidth ? " -w ".&textwidth : "")'
     nnoremap <C-f> :Autoformat<CR>
 
 Plug 'Valloric/MatchTagAlways'
