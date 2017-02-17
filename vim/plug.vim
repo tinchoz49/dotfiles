@@ -1,5 +1,7 @@
 call plug#begin('~/.vim/plugged')
 
+Plug 'scrooloose/nerdtree'
+
 Plug 'tpope/vim-fugitive'
     " fugitive options
     set diffopt+=vertical
@@ -51,23 +53,33 @@ Plug 'itchyny/lightline.vim'
           \ }
           \ }
 
-Plug 'ervandew/supertab'
-    " autocomplete stuff
-    set completeopt=longest,menuone
-    let g:SuperTabLongestHighlight = 1
-    let g:SuperTabClosePreviewOnPopupClose = 1
-    let g:SuperTabLongestEnhanced = 1
-    let g:SuperTabDefaultCompletionType = 'context'
-    autocmd FileType javascript setlocal omnifunc=tern#Complete
-    autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
-    autocmd FileType *
-        \ if &omnifunc != '' |
-        \   call SuperTabChain(&omnifunc, "<c-p>") |
-        \ endif
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
+    let g:ycm_complete_in_comments_and_strings=0
+    let g:ycm_use_ultisnips_completer = 1
+    let g:ycm_add_preview_to_completeopt = 1
+    let g:ycm_autoclose_preview_window_after_completion = 1
+    let g:ycm_always_populate_location_list = 1
 
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+Plug 'ternjs/tern_for_vim', { 'for': 'javascript', 'do': 'npm install' }
+    let g:tern_show_signature_in_pum = 1
+    let g:tern_show_argument_hints = 'on_hold'
+    set completeopt-=preview
 
 Plug 'shawncplus/phpcomplete.vim'
+    autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+
+"Plug 'ervandew/supertab'
+    "" autocomplete stuff
+    "set completeopt=longest,menuone
+    "let g:SuperTabLongestHighlight = 1
+    "let g:SuperTabClosePreviewOnPopupClose = 1
+    "let g:SuperTabLongestEnhanced = 1
+    "let g:SuperTabDefaultCompletionType = 'context'
+    "autocmd FileType javascript setlocal omnifunc=tern#Complete
+    "autocmd FileType *
+        "\ if &omnifunc != '' |
+        "\   call SuperTabChain(&omnifunc, "<c-p>") |
+        "\ endif
 
 Plug 'ctrlpvim/ctrlp.vim'
     nnoremap <Leader>bb :CtrlPBuffer<CR>
@@ -75,10 +87,7 @@ Plug 'ctrlpvim/ctrlp.vim'
     let g:ctrlp_map = ''
     " Ignore files in .gitignore
     let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-
-Plug 'scrooloose/nerdtree'
-    nnoremap <Leader>ff :NERDTreeToggle<CR>
-    nnoremap <Leader>f<Space> :NERDTreeFind<CR>
+    nnoremap <Leader>ff :NERDTreeFind<CR>
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
@@ -119,6 +128,7 @@ Plug 'svermeulen/vim-easyclip'
     nmap x <Plug>MoveMotionPlug
     xmap x <Plug>MoveMotionXPlug
     nmap xx <Plug>MoveMotionLinePlug
+
 
 " extra syntax
 Plug 'pangloss/vim-javascript'

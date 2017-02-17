@@ -29,6 +29,7 @@ set softtabstop=4
 set autoindent
 set smartindent
 set copyindent
+hi Search ctermfg=17 ctermbg=228 cterm=NONE guifg=#282a36 guibg=#f1fa8c gui=NONE
 
 " custom keymaps
 nnoremap <C-s> :update<CR>

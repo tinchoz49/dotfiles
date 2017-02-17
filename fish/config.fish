@@ -10,7 +10,7 @@ alias docker:start 'sudo systemctl start docker'
 alias docker:rmo-volume 'docker volume rm (docker volume ls -qf dangling=true)'
 
 set -x VISUAL "nvim"
-
+#set -x TERM "xterm"
 set -x NVM_DIR "$HOME/.nvm"
 
 function nvm
