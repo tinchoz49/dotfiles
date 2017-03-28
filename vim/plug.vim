@@ -1,30 +1,30 @@
 call plug#begin('~/.vim/plugged')
 
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+    nnoremap <Leader>bb :Buffers<CR>
+    nnoremap <Leader>p :History<CR>
+    nnoremap <Leader>t :Files<CR>
+
 Plug 'scrooloose/nerdtree'
+    nnoremap <Leader>ff :NERDTreeFind<CR>
 
 Plug 'tpope/vim-fugitive'
     " fugitive options
     set diffopt+=vertical
 
-Plug 'vim-syntastic/syntastic', { 'do': 'npm install -g resolve-eslint' }
-    set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
-    set statusline+=%*
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_loc_list_height = 5
-    let g:syntastic_auto_loc_list = 1
-    let g:syntastic_check_on_open = 0
-    let g:syntastic_check_on_wq = 1
-    let g:syntastic_javascript_eslint_exe = 'eslint --quiet'
-    let g:syntastic_javascript_checkers = ['eslint']
-    nnoremap <Leader>v :SyntasticCheck<CR>
+Plug 'w0rp/ale'
+    let g:ale_lint_on_enter = 0
+    let g:ale_lint_delay = 2000
+    let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+    let g:ale_javascript_eslint_use_global = 1
+    let g:ale_linters = {
+    \   'javascript': ['eslint'],
+    \}
 
 Plug 'tpope/vim-surround'
 
 Plug 'tpope/vim-repeat'
-
-Plug 'terryma/vim-multiple-cursors'
-    let g:multi_cursor_next_key='<C-d>'
 
 Plug 'Raimondi/delimitMate'
     let delimitMate_expand_cr = 1
@@ -37,12 +37,13 @@ Plug 'itchyny/lightline.vim'
     let g:lightline = {
           \ 'active': {
           \   'left': [ [ 'mode', 'paste' ],
-          \             [ 'fugitive', 'readonly', 'filename', 'gtm', 'modified' ] ]
+          \             [ 'fugitive', 'readonly', 'filename', 'ale', 'gtm', 'modified' ] ]
           \ },
           \ 'component': {
           \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
           \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
           \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
+          \   'ale': '%{ALEGetStatusLine()}',
           \   'gtm': '%{exists("*GTMStatusline")?GTMStatusline():""}'
           \ },
           \ 'component_visible_condition': {
@@ -53,41 +54,23 @@ Plug 'itchyny/lightline.vim'
           \ }
           \ }
 
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
-    let g:ycm_complete_in_comments_and_strings=0
+Plug 'mattn/emmet-vim'
+
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+    let g:ycm_complete_in_comments_and_strings=1
     let g:ycm_use_ultisnips_completer = 1
     let g:ycm_add_preview_to_completeopt = 1
     let g:ycm_autoclose_preview_window_after_completion = 1
     let g:ycm_always_populate_location_list = 1
+    let g:ycm_seed_identifiers_with_syntax = 1
+    let g:ycm_collect_identifiers_from_tags_files = 1
+    set completeopt-=preview
+    set completeopt+=menu,menuone,noinsert,noselect
+    set shortmess+=c
 
 Plug 'ternjs/tern_for_vim', { 'for': 'javascript', 'do': 'npm install' }
     let g:tern_show_signature_in_pum = 1
     let g:tern_show_argument_hints = 'on_hold'
-    set completeopt-=preview
-
-Plug 'shawncplus/phpcomplete.vim'
-    autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
-
-"Plug 'ervandew/supertab'
-    "" autocomplete stuff
-    "set completeopt=longest,menuone
-    "let g:SuperTabLongestHighlight = 1
-    "let g:SuperTabClosePreviewOnPopupClose = 1
-    "let g:SuperTabLongestEnhanced = 1
-    "let g:SuperTabDefaultCompletionType = 'context'
-    "autocmd FileType javascript setlocal omnifunc=tern#Complete
-    "autocmd FileType *
-        "\ if &omnifunc != '' |
-        "\   call SuperTabChain(&omnifunc, "<c-p>") |
-        "\ endif
-
-Plug 'ctrlpvim/ctrlp.vim'
-    nnoremap <Leader>bb :CtrlPBuffer<CR>
-    nnoremap <Leader>p :CtrlP<CR>
-    let g:ctrlp_map = ''
-    " Ignore files in .gitignore
-    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-    nnoremap <Leader>ff :NERDTreeFind<CR>
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
@@ -113,7 +96,8 @@ Plug 'Valloric/MatchTagAlways'
 
 Plug 'matze/vim-move'
 
-Plug 'mileszs/ack.vim', { 'do': 'sudo pacman -S --noconfirm ack' }
+Plug 'mileszs/ack.vim', { 'do': 'sudo pacman -S --noconfirm the_silver_searcher' }
+    let g:ackprg = 'ag --nogroup --nocolor --column'
 
 Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
 
@@ -129,9 +113,14 @@ Plug 'svermeulen/vim-easyclip'
     xmap x <Plug>MoveMotionXPlug
     nmap xx <Plug>MoveMotionLinePlug
 
+Plug 'qpkorr/vim-bufkill'
+    nnoremap <C-b><C-w> :BW<CR>
 
 " extra syntax
 Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+    let g:jsx_ext_required = 0
+
 Plug 'jwalton512/vim-blade'
 Plug 'othree/html5.vim'
 Plug 'keith/tmux.vim'
