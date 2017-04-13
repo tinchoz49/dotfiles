@@ -82,9 +82,18 @@ Plug 'heavenshell/vim-jsdoc'
 
 Plug 'ntpeters/vim-better-whitespace'
 
-Plug 'Chiel92/vim-autoformat', { 'do': 'npm install -g js-beautify' }
-    let g:formatdef_jsbeautify_javascript = '"js-beautify -a -X -p -f - -".(&expandtab ? "s ".shiftwidth() : "t").(&textwidth ? " -w ".&textwidth : "")'
-    nnoremap <C-f> :Autoformat<CR>
+Plug 'sbdchd/neoformat', { 'do': 'npm install -g prettier' }
+    let g:neoformat_basic_format_align = 1 " Enable alignment
+    let g:neoformat_basic_format_retab = 1 " Enable tab to spaces conversion
+    let g:neoformat_basic_format_trim = 1 " Enable trimmming of trailing whitespace
+    let g:neoformat_try_formatprg = 1
+    let g:neoformat_enabled_javascript = ['prettier']
+    let g:neoformat_javascript_prettier = {
+        \ 'exe': 'prettier',
+        \ 'args': ['--tab-width 4', '--single-quote']
+        \ }
+    autocmd BufWritePre *.js Neoformat
+    nnoremap <C-f> :Neoformat<CR>
 
 Plug 'Valloric/MatchTagAlways'
     let g:mta_filetypes = {
