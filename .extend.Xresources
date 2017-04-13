@@ -1,0 +1,49 @@
+URxvt.perl-ext-common: clipboard,resize-font
+
+URxvt.urgentOnBell: off
+URxvt.visualBell: off
+URxvt.iso14755: off
+URxvt.iso14755_52: off
+URxvt.meta8: true
+URxvt.depth: 32
+
+URxvt.internalBorder: 0
+URxvt.externalBorder: 0
+
+URxvt.scrollBar: off
+URxvt.saveLines: 1024
+URxvt.scrollTtyOutput:   false
+URxvt.scrollWithBuffer:  true
+URxvt.scrollTtyKeypress: true
+
+URxvt.inheritPixmap: false
+URxvt.fading: 0
+
+!font-resize keybindings
+URxvt.keysym.C-Up:     font-size:increase
+URxvt.keysym.C-Down:   font-size:decrease
+
+URxvt*font: xft:MesloLGSDZ Nerd Font:style=Regular:regular:pixelsize=16:antialias=true:hinting=true
+URxvt*boldFont: xft:MesloLGSDZ Nerd Font:style=Bold:bold:pixelsize=16:antialias=true:hinting=true
+URxvt*italicFont: xft:MesloLGSDZ Nerd Font:style=Italic:italic:pixelsize=16:antialias=true:hinting=true
+URxvt*boldItalicFont: xft:MesloLGSDZ Nerd Font:style=Bold Italic:bold:italic:pixelsize=16:antialias=true:hinting=true
+
+! Dracula Xresources palette
+URxvt*foreground: #F8F8F2
+URxvt*background: #282A36
+URxvt*color0:     #000000
+URxvt*color8:     #4D4D4D
+URxvt*color1:     #FF5555
+URxvt*color9:     #FF6E67
+URxvt*color2:     #50FA7B
+URxvt*color10:    #5AF78E
+URxvt*color3:     #F1FA8C
+URxvt*color11:    #F4F99D
+URxvt*color4:     #CAA9FA
+URxvt*color12:    #CAA9FA
+URxvt*color5:     #FF79C6
+URxvt*color13:    #FF92D0
+URxvt*color6:     #8BE9FD
+URxvt*color14:    #9AEDFE
+URxvt*color7:     #BFBFBF
+URxvt*color15:    #E6E6E6

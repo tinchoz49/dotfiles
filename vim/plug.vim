@@ -67,6 +67,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
     set completeopt-=preview
     set completeopt+=menu,menuone,noinsert,noselect
     set shortmess+=c
+    set pumheight=15
 
 Plug 'ternjs/tern_for_vim', { 'for': 'javascript', 'do': 'npm install' }
     let g:tern_show_signature_in_pum = 1

@@ -3,9 +3,9 @@ set shell=/bin/bash
 
 source ~/.vim/plug.vim
 
-if (has("termguicolors"))
-    set termguicolors
-endif
+"if (has("termguicolors"))
+    "set termguicolors
+"endif
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
 

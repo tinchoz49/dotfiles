@@ -15,9 +15,9 @@ set -x VISUAL "nvim"
 set -x NVM_DIR "$HOME/.nvm"
 
 function nvm
-  if test -e "$NVM_DIR/nvm.sh"
-    bass source "$NVM_DIR/nvm.sh" --no-use ';' nvm $argv
-  end
+    if test -e "$NVM_DIR/nvm.sh"
+        bass source "$NVM_DIR/nvm.sh" --no-use ';' nvm $argv
+    end
 end
 bass source "$NVM_DIR/nvm.sh"
 
@@ -29,11 +29,16 @@ set fish_color_command white --bold
 
 set fish_prompt_pwd_dir_length 3
 function __parse_current_folder -d "Replace '$HOME' with '~'"
-  prompt_pwd | sed "s|$HOME|~|"
+    prompt_pwd | sed "s|$HOME|~|"
 end
 
 function fish_title
-  prompt_pwd
+    prompt_pwd
+end
+
+function npm-do
+    set -lx PATH (npm bin) $PATH
+    eval $argv
 end
 
 set -x FZF_DEFAULT_COMMAND 'ag -g ""'
