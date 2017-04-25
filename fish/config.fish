@@ -7,6 +7,7 @@ alias vim 'nvim'
 alias am 'atom'
 alias vs 'code'
 alias docker:start 'sudo systemctl start docker'
+alias docker:stop 'sudo systemctl stop docker'
 alias docker:volume-lso 'docker volume ls -qf dangling=true'
 alias docker:volume-rmo 'docker volume rm (docker volume ls -qf dangling=true)'
 
@@ -43,4 +44,3 @@ end
 
 set -x FZF_DEFAULT_COMMAND 'ag -g ""'
 set -x FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
-
