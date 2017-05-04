@@ -3,13 +3,13 @@ set shell=/bin/bash
 
 source ~/.vim/plug.vim
 
-"if (has("termguicolors"))
-    "set termguicolors
-"endif
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=dark
+if (has("termguicolors"))
+    set termguicolors
+endif
 
 syntax on
+colorscheme dracula
+set background=dark
 set nobackup
 set nowritebackup
 set noswapfile
@@ -24,7 +24,6 @@ set clipboard=unnamed,unnamedplus
 set expandtab " Tabs are spaces, not tabs
 set shiftwidth=4 " how many columns text is indented with the reindent operations (<< and >>)
 set softtabstop=4 " number of spaces to use for autoindenting
-hi Search ctermfg=17 ctermbg=228 cterm=NONE guifg=#282a36 guibg=#f1fa8c gui=NONE
 
 " custom keymaps
 nnoremap <C-s> :update<CR>

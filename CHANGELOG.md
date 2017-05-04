@@ -9,9 +9,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - support for haskell files and hjs files (jsig type definitions)
 - comments in some properties for vim
 - fzf command-line fuzzy finder for fish and vim
+- rainbow plugin for vim
 
 ### Changed
 - autocomplete in vim
+
+### Fixed
+- truecolor in konsole + tmux
 
 ### Removed
 - unnecesary properties in vim because they already exist in neovim by default

@@ -126,7 +126,12 @@ nmap xx <Plug>MoveMotionLinePlug
 Plug 'qpkorr/vim-bufkill'
 nnoremap <C-b><C-w> :BW<CR>
 
+Plug 'junegunn/rainbow_parentheses.vim'
+let g:rainbow#pairs = [['(', ')'], ['[', ']']]
+autocmd FileType * RainbowParentheses
+
 " extra syntax
+
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
@@ -143,5 +148,3 @@ Plug 'neovimhaskell/haskell-vim'
 Plug 'dracula/vim'
 
 call plug#end()
-
-colorscheme dracula
