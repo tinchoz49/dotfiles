@@ -36,6 +36,7 @@ Plug 'scrooloose/nerdcommenter'
 
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
+            \ 'colorscheme': 'PaperColor',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             [ 'fugitive', 'readonly', 'filename', 'ale', 'gtm', 'modified' ] ]
@@ -126,14 +127,11 @@ nmap xx <Plug>MoveMotionLinePlug
 Plug 'qpkorr/vim-bufkill'
 nnoremap <C-b><C-w> :BW<CR>
 
-Plug 'junegunn/rainbow_parentheses.vim'
-let g:rainbow#pairs = [['(', ')'], ['[', ']']]
-autocmd FileType * RainbowParentheses
-
 " extra syntax
 
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
+let g:javascript_plugin_jsdoc = 1
 let g:jsx_ext_required = 0
 
 Plug 'jwalton512/vim-blade'
@@ -146,5 +144,6 @@ Plug 'neovimhaskell/haskell-vim'
 
 " themes
 Plug 'dracula/vim'
+Plug 'NLKNguyen/papercolor-theme'
 
 call plug#end()

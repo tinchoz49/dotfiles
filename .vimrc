@@ -5,11 +5,12 @@ source ~/.vim/plug.vim
 
 if (has("termguicolors"))
     set termguicolors
+    set mouse=a
 endif
 
 syntax on
-colorscheme dracula
-set background=dark
+set background=light
+colorscheme PaperColor
 set nobackup
 set nowritebackup
 set noswapfile
@@ -38,5 +39,4 @@ autocmd BufWritePre * StripWhitespace
 
 " use hjs extension with haskell syntax
 au BufNewFile,BufRead *.hjs setlocal ft=haskell
-
 

@@ -1,5 +1,5 @@
 [Appearance]
-ColorScheme=dracula
+ColorScheme=paper
 Font=Fira Code Retina,14,-1,5,53,0,0,0,0,0
 UseFontLineChararacters=true
 
