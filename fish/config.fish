@@ -21,11 +21,17 @@ function nvm
 end
 bass source "$NVM_DIR/nvm.sh"
 
-set -x ANDROID_HOME ~/Android/Sdk
+set -x ANDROID_HOME ~/apps/android/sdk
 set -x GOPATH ~/.gocode
 set -x CARGO ~/.cargo/bin
+set -x COMPOSER_BIN ~/.config/composer/vendor/bin
+set -x RUBY_BIN ~/.gem/ruby/2.3.0/bin
+set -x JAVA_BIN /usr/lib/jvm/java-8-openjdk/bin
 
-set PATH $PATH ~/.config/composer/vendor/bin ~/.gem/ruby/2.3.0/bin $GOPATH/bin $ANDROID_HOME/tools $ANDROID_HOME/platform-tools $CARGO
+set PATH $PATH $CARGO $COMPOSER_BIN $RUBY_BIN $GOPATH/bin
+
+# android staff
+set PATH $PATH $JAVA_BIN $ANDROID_HOME/tools $ANDROID_HOME/platform-tools $ANDROID_HOME/build-tools/25.0.3
 
 set fish_color_command white --bold
 

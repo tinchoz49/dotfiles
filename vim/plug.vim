@@ -16,7 +16,7 @@ set diffopt+=vertical
 Plug 'w0rp/ale', { 'do': 'npm install -g eslint_d' }
 let g:ale_lint_on_enter = 0
 let g:ale_lint_delay = 2000
-let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+let g:ale_statusline_format = ['✕ %d', '⚠ %d', '✔ ok']
 let g:ale_javascript_eslint_use_global = 1
 let g:ale_javascript_eslint_executable = 'eslint_d'
 let g:ale_linters = {
@@ -109,6 +109,7 @@ Plug 'matze/vim-move'
 
 Plug 'mileszs/ack.vim', { 'do': 'sudo pacman -S --noconfirm the_silver_searcher' }
 let g:ackprg = 'ag --nogroup --nocolor --column'
+Plug 'dyng/ctrlsf.vim'
 
 Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
 
@@ -127,12 +128,16 @@ nmap xx <Plug>MoveMotionLinePlug
 Plug 'qpkorr/vim-bufkill'
 nnoremap <C-b><C-w> :BW<CR>
 
+Plug 'luochen1990/rainbow'
+let g:rainbow_active = 1
+
 " extra syntax
 
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 let g:javascript_plugin_jsdoc = 1
-let g:jsx_ext_required = 0
+Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascript.jsx'] }
+"Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
+"let g:jsx_ext_required = 0
 
 Plug 'jwalton512/vim-blade'
 Plug 'othree/html5.vim'

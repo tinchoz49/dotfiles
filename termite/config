@@ -11,7 +11,7 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = false
 clickable_url = false
-font = MesloLGSDZ Nerd Font 12
+font = MesloLGSDZ Nerd Font 14
 scrollback_lines = 1000
 search_wrap = true
 
@@ -26,40 +26,39 @@ browser = google-chrome-stable
 [colors]
 
 # special
-foreground      = #f8f8f2
-foreground_bold = #f8f8f2
-cursor          = #f8f8f2
-cursor_foreground = #000000
-background      = #282a36
+#foreground      = #424242
+#foreground_bold = #424242
+#cursor          = #424242
+background      = #eeeeee
 
 # black
-color0  = #000000
-color8  = #4d4d4d
+color0  = #212121
+color8  = #737373
 
 # red
-color1  = #ff5555
-color9  = #ff6e67
+color1  = #c30771
+color9  = #fb007a
 
 # green
-color2  = #50fa7b
-color10 = #5af78e
+color2  = #10a778
+color10 = #5fd7af
 
 # yellow
-color3  = #f1fa8c
-color11 = #f4f99d
+color3  = #bc601e
+color11 = #d96000
 
 # blue
-color4  = #caa9fa
-color12 = #caa9fa
+color4  = #008ec4
+color12 = #5f87af
 
 # magenta
-color5  = #ff79c6
-color13 = #ff92d0
+color5  = #523c79
+color13 = #6855de
 
 # cyan
-color6  = #8be9fd
-color14 = #9aedfe
+color6  = #005f87
+color14 = #4fb8cc
 
 # white
-color7  = #bfbfbf
-color15 = #e6e6e6
+color7  = #bcbcbd
+color15 = #444444
