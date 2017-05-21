@@ -1,5 +1,6 @@
 # list plugins: pure getopts tmux-zen lookup config bass spin upto
 set fish_greeting ''
+# fix style papercolor
 #set -x TERM xterm-256color
 alias network:restart 'sudo systemctl restart NetworkManager.service'
 alias vi 'nvim'
