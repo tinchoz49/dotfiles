@@ -2,7 +2,8 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-nnoremap <Leader>bb :Buffers<CR>
+
+nnoremap <nowait><Leader>b :Buffers<CR>
 nnoremap <Leader>p :History<CR>
 nnoremap <Leader>t :Files<CR>
 
@@ -126,6 +127,7 @@ xmap x <Plug>MoveMotionXPlug
 nmap xx <Plug>MoveMotionLinePlug
 
 Plug 'qpkorr/vim-bufkill'
+let g:BufKillCreateMappings = 0
 nnoremap <C-b><C-w> :BW<CR>
 
 Plug 'luochen1990/rainbow'
