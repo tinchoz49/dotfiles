@@ -40,32 +40,32 @@ URxvt*boldFont: xft:MesloLGSDZ Nerd Font:style=Bold:bold:pixelsize=20:antialias=
 URxvt*italicFont: xft:MesloLGSDZ Nerd Font:style=Italic:italic:pixelsize=20:antialias=true:hinting=true
 URxvt*boldItalicFont: xft:MesloLGSDZ Nerd Font:style=Bold Italic:bold:italic:pixelsize=20:antialias=true:hinting=true
 
-! PaperColor Theme light
-URxvt*cursorColor: #4D4D4C
-URxvt*pointerColor: #4D4D4C
-URxvt.foreground: #424242
-URxvt.background: #EEEEEE
-! black
-URxvt.color0: #212121
-URxvt.color8: #737373
-! red
-URxvt.color1: #c30771
-URxvt.color9: #fb007a
-! green
-URxvt.color2: #10a778
-URxvt.color10: #5fd7af
-! yellow / orange
-URxvt.color3: #bc601e
-URxvt.color11: #d96000
-!blue
-URxvt.color4: #008ec4
-URxvt.color12: #5f87af
-! magenta
-URxvt.color5: #523c79
-URxvt.color13: #6855de
-! cyan
-URxvt.color6: #005f87
-URxvt.color14: #4fb8cc
-! white
-URxvt.color7: #bcbcbd
-URxvt.color15: #444444
+/*! PaperColor Theme light*/
+/*URxvt*cursorColor: #4D4D4C*/
+/*URxvt*pointerColor: #4D4D4C*/
+/*URxvt.foreground: #424242*/
+/*URxvt.background: #EEEEEE*/
+/*! black*/
+/*URxvt.color0: #212121*/
+/*URxvt.color8: #737373*/
+/*! red*/
+/*URxvt.color1: #c30771*/
+/*URxvt.color9: #fb007a*/
+/*! green*/
+/*URxvt.color2: #10a778*/
+/*URxvt.color10: #5fd7af*/
+/*! yellow / orange*/
+/*URxvt.color3: #bc601e*/
+/*URxvt.color11: #d96000*/
+/*!blue*/
+/*URxvt.color4: #008ec4*/
+/*URxvt.color12: #5f87af*/
+/*! magenta*/
+/*URxvt.color5: #523c79*/
+/*URxvt.color13: #6855de*/
+/*! cyan*/
+/*URxvt.color6: #005f87*/
+/*URxvt.color14: #4fb8cc*/
+/*! white*/
+/*URxvt.color7: #bcbcbd*/
+/*URxvt.color15: #444444*/

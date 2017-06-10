@@ -1,7 +1,4 @@
-# list plugins: pure getopts tmux-zen lookup config bass spin upto
 set fish_greeting ''
-# fix style papercolor
-#set -x TERM xterm-256color
 alias network:restart 'sudo systemctl restart NetworkManager.service'
 alias vi 'nvim'
 alias vim 'nvim'
@@ -13,8 +10,8 @@ alias docker:volume-lso 'docker volume ls -qf dangling=true'
 alias docker:volume-rmo 'docker volume rm (docker volume ls -qf dangling=true)'
 
 set -x VISUAL "nvim"
-set -x NVM_DIR "$HOME/.nvm"
 
+set -x NVM_DIR "$HOME/.nvm"
 function nvm
     if test -e "$NVM_DIR/nvm.sh"
         bass source "$NVM_DIR/nvm.sh" --no-use ';' nvm $argv
@@ -33,8 +30,6 @@ set PATH $PATH $CARGO $COMPOSER_BIN $RUBY_BIN $GOPATH/bin
 
 # android staff
 set PATH $PATH $JAVA_BIN $ANDROID_HOME/tools $ANDROID_HOME/platform-tools $ANDROID_HOME/build-tools/25.0.3
-
-set fish_color_command white --bold
 
 set fish_prompt_pwd_dir_length 3
 function __parse_current_folder -d "Replace '$HOME' with '~'"

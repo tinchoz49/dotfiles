@@ -2,13 +2,13 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-
 nnoremap <nowait><Leader>b :Buffers<CR>
 nnoremap <Leader>p :History<CR>
 nnoremap <Leader>t :Files<CR>
 
 Plug 'scrooloose/nerdtree'
-nnoremap <Leader>ff :NERDTreeFind<CR>
+map <Leader>f :NERDTreeFind<CR>
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'tpope/vim-fugitive'
 " fugitive options
@@ -41,14 +41,15 @@ let g:lightline = {
             \ 'colorscheme': 'PaperColor',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'fugitive', 'readonly', 'filename', 'ale', 'gtm', 'modified' ] ]
+            \             [ 'fugitive', 'readonly', 'filename', 'ale', 'gtm', 'modified', 'cap' ] ]
             \ },
             \ 'component': {
             \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
             \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
             \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
             \   'ale': '%{ALEGetStatusLine()}',
-            \   'gtm': '%{exists("*GTMStatusline")?GTMStatusline():""}'
+            \   'gtm': '%{exists("*GTMStatusline")?GTMStatusline():""}',
+            \   'cap': '%{vimcaps#statusline(-3)}'
             \ },
             \ 'component_visible_condition': {
             \   'readonly': '(&filetype!="help"&& &readonly)',
@@ -76,8 +77,6 @@ set pumheight=15
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 let g:tern_show_signature_in_pum = 1
 let g:tern_show_argument_hints = 'on_hold'
-
-Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'heavenshell/vim-jsdoc'
 nmap <silent> <C-l> <Plug>(jsdoc)
@@ -131,10 +130,15 @@ Plug 'qpkorr/vim-bufkill'
 let g:BufKillCreateMappings = 0
 nnoremap <C-b><C-w> :BW<CR>
 
-Plug 'luochen1990/rainbow'
-let g:rainbow_active = 1
+"Plug 'luochen1990/rainbow'
+"let g:rainbow_active = 1
+"let g:rainbow_conf = {
+            "\   'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta']
+            "\  }
 
 Plug 'tpope/vim-eunuch'
+
+Plug 'suxpert/vimcaps'
 
 " extra syntax
 
@@ -142,6 +146,7 @@ Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 let g:javascript_plugin_jsdoc = 1
 Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascript.jsx'] }
 
+Plug 'fleischie/vim-styled-components'
 Plug 'jwalton512/vim-blade'
 Plug 'othree/html5.vim'
 Plug 'keith/tmux.vim'
