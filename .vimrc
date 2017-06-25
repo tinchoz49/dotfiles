@@ -4,7 +4,10 @@ set shell=/bin/bash
 source ~/.vim/plug.vim
 
 set termguicolors
-set mouse=a
+set mouse=a  " enable mouse
+set mousehide  " hide when characters are typed
+set showtabline=2
+set noshowmode
 
 syntax on
 set background=light
@@ -32,8 +35,8 @@ inoremap <C-s> <ESC>:update<CR>
 nnoremap <C-n> :bnext<CR>
 nnoremap <C-p> :bprevious<CR>
 
-" whitestrip on save
-autocmd BufWritePre * StripWhitespace
+" fuck you :suspend
+nnoremap <C-z> <nop>
 
 " use hjs extension with haskell syntax
 au BufNewFile,BufRead *.hjs setlocal ft=haskell
