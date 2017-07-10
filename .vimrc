@@ -27,6 +27,16 @@ set expandtab " Tabs are spaces, not tabs
 set shiftwidth=4 " how many columns text is indented with the reindent operations (<< and >>)
 set softtabstop=4 " number of spaces to use for autoindenting
 
+" search on visual selector text
+function! s:VSetSearch(cmdtype)
+  let temp = @s
+  norm! gv"sy
+  let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
+  let @s = temp
+endfunction
+
+xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
+
 " custom keymaps
 nnoremap <C-s> :update<CR>
 inoremap <C-s> <ESC>:update<CR>

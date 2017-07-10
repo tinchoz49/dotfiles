@@ -5,11 +5,20 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 nnoremap <nowait><Leader>b :Buffers<CR>
 nnoremap <Leader>p :History<CR>
-nnoremap <Leader>t :Files<CR>
+nnoremap <Leader>f :Files<CR>
+nnoremap <Leader>t :Tags<CR>
+
+" tagbar
+Plug 'majutsushi/tagbar'
+nnoremap <F8> :TagbarToggle<CR>
+
+" automatic ctags
+Plug 'ludovicchabant/vim-gutentags'
 
 " A tree explorer plugin for vim.
 Plug 'scrooloose/nerdtree'
-map <Leader>f :NERDTreeFind<CR>
+map <Leader>n :NERDTreeFind<CR>
+let g:NERDTreeMouseMode = 2
 " Git support for nerdtree
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
@@ -27,7 +36,7 @@ let g:ale_statusline_format = ['✕ %d', '⚠ %d', '✔ ok']
 let g:ale_javascript_eslint_use_global = 1
 let g:ale_javascript_eslint_executable = 'eslint_d'
 let g:ale_linters = {
-            \   'javascript': ['eslint'],
+            \   'javascript': ['eslint', 'flow'],
             \}
 
 " Is all about surroundings: parentheses, brackets, quotes, XML tags, and more.
@@ -53,7 +62,7 @@ let g:lightline = {
             \ 'colorscheme': 'PaperColor',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'fugitive', 'readonly', 'filename', 'ale', 'gtm', 'modified', 'cap' ] ]
+            \             [ 'fugitive', 'readonly', 'filename', 'ale', 'gtm', 'modified', 'cap', 'gutentags' ] ]
             \ },
             \ 'component': {
             \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
@@ -61,15 +70,17 @@ let g:lightline = {
             \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
             \   'ale': '%{ALEGetStatusLine()}',
             \   'gtm': '%{exists("*GTMStatusline")?GTMStatusline():""}',
-            \   'cap': '%{vimcaps#statusline(-3)}'
+            \   'cap': '%{vimcaps#statusline(-3)}',
+            \   'gutentags': '%{gutentags#statusline("ctags...")}'
             \ },
             \ 'component_visible_condition': {
             \   'readonly': '(&filetype!="help"&& &readonly)',
             \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
             \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
-            \   'gtm': '(exists("GTMStatusline") && ""!=GTMStatusline())'
+            \   'gtm': '(exists("GTMStatusline") && ""!=GTMStatusline())',
+            \   'gutentags': '(gutentags#statusline("show") == "show")'
             \ },
-            \ 'tabline': {'left': [['buffers']], 'right': [['close']]},
+            \ 'tabline': {'left': [['buffers']]},
             \ 'component_expand': {'buffers': 'lightline#bufferline#buffers'},
             \ 'component_type': {'buffers': 'tabsel'}
             \ }
@@ -86,9 +97,9 @@ set shortmess+=c
 set pumheight=15
 
 " Ternjs for vim
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-let g:tern_show_signature_in_pum = 1
-let g:tern_show_argument_hints = 'on_hold'
+"Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+"let g:tern_show_signature_in_pum = 1
+"let g:tern_show_argument_hints = 'on_hold'
 
 " Create jsdoc
 Plug 'heavenshell/vim-jsdoc'
