@@ -10,8 +10,8 @@ set showtabline=2
 set noshowmode
 
 syntax on
-set background=light
-colorscheme PaperColor
+set background=dark
+colorscheme dracula
 set nobackup
 set nowritebackup
 set noswapfile
@@ -42,8 +42,8 @@ nnoremap <C-s> :update<CR>
 inoremap <C-s> <ESC>:update<CR>
 
 " buffer config
-nnoremap <C-n> :bnext<CR>
-nnoremap <C-p> :bprevious<CR>
+nnoremap <C-right> :bnext<CR>
+nnoremap <C-left> :bprevious<CR>
 
 " fuck you :suspend
 nnoremap <C-z> <nop>

@@ -25,39 +25,41 @@ browser = google-chrome-stable
 
 [colors]
 
+# https://critical.ch/xterm/
+
 # special
-foreground      = #373b41
-foreground_bold = #373b41
-background      = #eeeeee
+foreground      = #f8f8f2
+foreground_bold = #f8f8f2
+background      = #282a36
 
 # black
-color0  = #1d1f21
-color8  = #969896
+color0  = #000000
+color8  = #4d4d4d
 
 # red
-color1  = #cc342b
-color9  = #cc342b
+color1  = #ff5555
+color9  = #ff6e67
 
 # green
-color2  = #198844
-color10 = #198844
+color2  = #50fa7b
+color10 = #5af78e
 
 # yellow
-color3  = #fba922
-color11 = #fba922
+color3  = #f1fa8c
+color11 = #f4f99d
 
 # blue
-color4  = #3971ed
-color12 = #3971ed
+color4  = #bd93f9
+color12 = #caa9fa
 
 # magenta
-color5  = #a36ac7
-color13 = #a36ac7
+color5  = #ff79c6
+color13 = #ff92d0
 
 # cyan
-color6  = #3971ed
-color14 = #3971ed
+color6  = #8be9fd
+color14 = #9aedfe
 
 # white
-color7  = #D1B390
-color15 = #D1B390
+color7  = #bfbfbf
+color15 = #e6e6e6

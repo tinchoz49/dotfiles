@@ -1,19 +1,9 @@
 call plug#begin('~/.vim/plugged')
 
 " A command-line fuzzy finder written in Go
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-nnoremap <nowait><Leader>b :Buffers<CR>
-nnoremap <Leader>p :History<CR>
-nnoremap <Leader>f :Files<CR>
-nnoremap <Leader>t :Tags<CR>
-
-" tagbar
-Plug 'majutsushi/tagbar'
-nnoremap <F8> :TagbarToggle<CR>
-
-" automatic ctags
-Plug 'ludovicchabant/vim-gutentags'
+Plug 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+nnoremap <C-t> :CtrlPTag<CR>
 
 " A tree explorer plugin for vim.
 Plug 'scrooloose/nerdtree'
@@ -59,7 +49,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'itchyny/lightline.vim'
 Plug 'mgee/lightline-bufferline'
 let g:lightline = {
-            \ 'colorscheme': 'PaperColor',
+            \ 'colorscheme': 'Dracula',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             [ 'fugitive', 'readonly', 'filename', 'ale', 'gtm', 'modified', 'cap', 'gutentags' ] ]
@@ -71,16 +61,16 @@ let g:lightline = {
             \   'ale': '%{ALEGetStatusLine()}',
             \   'gtm': '%{exists("*GTMStatusline")?GTMStatusline():""}',
             \   'cap': '%{vimcaps#statusline(-3)}',
-            \   'gutentags': '%{gutentags#statusline("ctags...")}'
+            \   'gutentags': '%{exists("*gutentags#statusline")?gutentags#statusline("ctags..."):""}'
             \ },
             \ 'component_visible_condition': {
             \   'readonly': '(&filetype!="help"&& &readonly)',
             \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
             \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
             \   'gtm': '(exists("GTMStatusline") && ""!=GTMStatusline())',
-            \   'gutentags': '(gutentags#statusline("show") == "show")'
+            \   'gutentags': '(exists("*gutentags#statusline") && (gutentags#statusline("show") == "show"))'
             \ },
-            \ 'tabline': {'left': [['buffers']]},
+            \ 'tabline': {'left': [['buffers']], 'right': [['']]},
             \ 'component_expand': {'buffers': 'lightline#bufferline#buffers'},
             \ 'component_type': {'buffers': 'tabsel'}
             \ }
@@ -89,17 +79,32 @@ let g:lightline = {
 Plug 'mattn/emmet-vim'
 let g:user_emmet_leader_key='<C-Z>'
 
-" Simple autocomplete but works nice with ternjs
-Plug 'ajh17/VimCompletesMe'
+" tagbar
+Plug 'majutsushi/tagbar'
+nnoremap <F8> :TagbarToggle<CR>
+
+" automatic ctags
+Plug 'ludovicchabant/vim-gutentags'
+
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_refresh_always = 1
+let g:deoplete#file#enable_buffer_path = 1
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 set completeopt-=preview
 set completeopt+=menu,menuone,noinsert,noselect
 set shortmess+=c
 set pumheight=15
 
-" Ternjs for vim
-"Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-"let g:tern_show_signature_in_pum = 1
-"let g:tern_show_argument_hints = 'on_hold'
+Plug 'Shougo/echodoc.vim'
+let g:echodoc_enable_at_startup = 1
+
+"Typescript Plugins
+Plug 'mhartington/nvim-typescript', {
+            \'do': ':UpdateRemotePlugins'
+            \}
+let g:nvim_typescript#javascript_support = 1
 
 " Create jsdoc
 Plug 'heavenshell/vim-jsdoc'
@@ -136,7 +141,9 @@ Plug 'matze/vim-move'
 
 " Search plugins
 Plug 'mileszs/ack.vim', { 'do': 'sudo pacman -S --noconfirm the_silver_searcher' }
-let g:ackprg = 'ag --nogroup --nocolor --column'
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 " Amazing search and replace plugin, the command is: CtrlSF <search_value>
 Plug 'dyng/ctrlsf.vim'
@@ -171,6 +178,8 @@ Plug 'tpope/vim-eunuch'
 " Never be bothered by caps lock
 Plug 'suxpert/vimcaps'
 
+Plug 'thaerkh/vim-indentguides'
+
 " extra syntax
 
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
@@ -179,6 +188,7 @@ let g:javascript_plugin_flow = 1
 Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascript.jsx'] }
 let g:vim_jsx_pretty_colorful_config = 1
 
+Plug 'leafgarland/typescript-vim'
 Plug 'fleischie/vim-styled-components'
 Plug 'jwalton512/vim-blade'
 Plug 'othree/html5.vim'
