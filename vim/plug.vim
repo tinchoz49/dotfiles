@@ -3,12 +3,20 @@ call plug#begin('~/.vim/plugged')
 " A command-line fuzzy finder written in Go
 Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_root_markers = ['package.json']
 nnoremap <C-t> :CtrlPTag<CR>
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+let g:ctrlp_custom_ignore = '\v[\/](\.(git|hg|svn)|node_modules)$'
+
+" Better way to work with copy and paste in vim
+Plug 'svermeulen/vim-easyclip'
 
 " A tree explorer plugin for vim.
 Plug 'scrooloose/nerdtree'
 map <Leader>n :NERDTreeFind<CR>
 let g:NERDTreeMouseMode = 2
+let g:NERDTreeMapMenu='M'
+
 " Git support for nerdtree
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
@@ -160,13 +168,6 @@ let g:gtm_plugin_status_enabled = 0
 " ]q is :cnext. [q is :cprevious. ]a is :next. [b is :bprevious
 Plug 'tpope/vim-unimpaired'
 
-" Better way to work with copy and paste in vim
-Plug 'svermeulen/vim-easyclip'
-let g:EasyClipUseCutDefaults = 0
-nmap x <Plug>MoveMotionPlug
-xmap x <Plug>MoveMotionXPlug
-nmap xx <Plug>MoveMotionLinePlug
-
 " Wipe a file from the buffer and keep the window/split intact
 Plug 'qpkorr/vim-bufkill'
 let g:BufKillCreateMappings = 0
@@ -177,8 +178,6 @@ Plug 'tpope/vim-eunuch'
 
 " Never be bothered by caps lock
 Plug 'suxpert/vimcaps'
-
-Plug 'thaerkh/vim-indentguides'
 
 " extra syntax
 

@@ -30,7 +30,8 @@ set -x JAVA_BIN /usr/lib/jvm/java-8-openjdk/bin
 set PATH $PATH $CARGO $COMPOSER_BIN $RUBY_BIN $GOPATH/bin
 
 # android staff
-#set PATH $PATH $JAVA_BIN $ANDROID_HOME/tools $ANDROID_HOME/platform-tools $ANDROID_HOME/build-tools/25.0.3
+set PATH $PATH $JAVA_BIN $ANDROID_HOME/tools $ANDROID_HOME/platform-tools
+#$ANDROID_HOME/build-tools/25.0.3
 
 set fish_prompt_pwd_dir_length 3
 function __parse_current_folder -d "Replace '$HOME' with '~'"
