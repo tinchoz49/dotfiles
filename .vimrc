@@ -7,11 +7,12 @@ set termguicolors
 set mouse=a  " enable mouse
 set mousehide  " hide when characters are typed
 set showtabline=2
-set noshowmode
 
 syntax on
 set background=dark
 colorscheme dracula
+set nocursorline
+set lazyredraw
 set nobackup
 set nowritebackup
 set noswapfile

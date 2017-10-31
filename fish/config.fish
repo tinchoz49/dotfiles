@@ -9,9 +9,9 @@ alias docker:stop 'sudo systemctl stop docker'
 alias docker:volume-lso 'docker volume ls -qf dangling=true'
 alias docker:volume-rmo 'docker volume rm (docker volume ls -qf dangling=true)'
 alias docker:container-kall 'docker stop (docker ps -a -q); and docker rm (docker ps -a -q)'
+alias rn:reload 'adb connect (adb shell ip route | awk \'{print $9}\'); adb shell input keyevent 82; adb shell input keyevent 23; adb shell input keyevent 23';
 
 set -x VISUAL "nvim"
-
 set -x NVM_DIR "$HOME/.nvm"
 function nvm
     if test -e "$NVM_DIR/nvm.sh"
@@ -47,5 +47,8 @@ function npm-do
     eval $argv
 end
 
-set -x FZF_DEFAULT_COMMAND 'ag -g ""'
-set -x FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
+function emulator
+    eval (dirname (which emulator))/emulator $argv
+end
+
+set -x FZF_DEFAULT_COMMAND 'ag --hidden --ignore .git --ignore node_modules -g ""'

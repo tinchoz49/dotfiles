@@ -1,9 +1,27 @@
+! ------------------------------------------------------------------------------
+! ROFI Color theme
+! Copyright: 2017 leofa
+! ------------------------------------------------------------------------------
+! "Color scheme for normal row" Set from: File
+rofi.color-normal:                   argb:31d1f21, #c4cbd4, argb:96404552, #4084d6, #f9f9f9
+! "Color scheme for urgent row" Set from: File
+rofi.color-urgent:                   argb:2c1d1f21, #cc6666, argb:e54b5160, #a54242, #f9f9f9
+! "Color scheme for active row" Set from: File
+rofi.color-active:                   argb:2c1d1f21, #65acff, argb:e44b5160, #4491ed, #f9f9f9
+! "Color scheme window" Set from: File
+rofi.color-window:                   argb:f22d303b, #7c8389, #1d1f21
+! "Separator style (none, dash, solid)" Set from: XResources
+rofi.separator-style:                solid
+
 URxvt.perl-ext-common: clipboard,resize-font,fullscreen
 
 URxvt.urgentOnBell: true
 URxvt.visualBell: true
 URxvt*meta8: false
 URxvt.depth: 32
+urxvt*background: rgba:0000/0000/0200/c800
+urxvt*transparent: true
+urxvt*shading: 30
 
 ! Start maximized
 URxvt*geometry: 256x96
@@ -40,32 +58,22 @@ URxvt*boldFont: xft:MesloLGSDZ Nerd Font:style=Bold:bold:pixelsize=20:antialias=
 URxvt*italicFont: xft:MesloLGSDZ Nerd Font:style=Italic:italic:pixelsize=20:antialias=true:hinting=true
 URxvt*boldItalicFont: xft:MesloLGSDZ Nerd Font:style=Bold Italic:bold:italic:pixelsize=20:antialias=true:hinting=true
 
-/*! PaperColor Theme light*/
-/*URxvt*cursorColor: #4D4D4C*/
-/*URxvt*pointerColor: #4D4D4C*/
-/*URxvt.foreground: #424242*/
-/*URxvt.background: #EEEEEE*/
-/*! black*/
-/*URxvt.color0: #212121*/
-/*URxvt.color8: #737373*/
-/*! red*/
-/*URxvt.color1: #c30771*/
-/*URxvt.color9: #fb007a*/
-/*! green*/
-/*URxvt.color2: #10a778*/
-/*URxvt.color10: #5fd7af*/
-/*! yellow / orange*/
-/*URxvt.color3: #bc601e*/
-/*URxvt.color11: #d96000*/
-/*!blue*/
-/*URxvt.color4: #008ec4*/
-/*URxvt.color12: #5f87af*/
-/*! magenta*/
-/*URxvt.color5: #523c79*/
-/*URxvt.color13: #6855de*/
-/*! cyan*/
-/*URxvt.color6: #005f87*/
-/*URxvt.color14: #4fb8cc*/
-/*! white*/
-/*URxvt.color7: #bcbcbd*/
-/*URxvt.color15: #444444*/
+! Dracula Xresources palette
+*.foreground: #F8F8F2
+*.background: #282A36
+*.color0:     #000000
+*.color8:     #4D4D4D
+*.color1:     #FF5555
+*.color9:     #FF6E67
+*.color2:     #50FA7B
+*.color10:    #5AF78E
+*.color3:     #F1FA8C
+*.color11:    #F4F99D
+*.color4:     #BD93F9
+*.color12:    #CAA9FA
+*.color5:     #FF79C6
+*.color13:    #FF92D0
+*.color6:     #8BE9FD
+*.color14:    #9AEDFE
+*.color7:     #BFBFBF
+*.color15:    #E6E6E6

@@ -1,12 +1,18 @@
 call plug#begin('~/.vim/plugged')
 
-" A command-line fuzzy finder written in Go
 Plug 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-let g:ctrlp_root_markers = ['package.json']
-nnoremap <C-t> :CtrlPTag<CR>
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-let g:ctrlp_custom_ignore = '\v[\/](\.(git|hg|svn)|node_modules)$'
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_working_path_mode = 'a'
+if executable('ag')
+    let g:ctrlp_use_caching = 0
+    set grepprg=ag\ --nogroup\ --nocolor\ --hidden\ --ignore\ node_modules\
+    let g:ctrlp_user_command = 'ag %s -l --hidden --ignore .git --ignore node_modules -g ""'
+else
+    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+    let g:ctrlp_prompt_mappings = {
+                \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+                \ }
+endif
 
 " Better way to work with copy and paste in vim
 Plug 'svermeulen/vim-easyclip'
@@ -25,18 +31,6 @@ Plug 'tpope/vim-fugitive'
 " fugitive options: Gdiff split in vertical mode by default
 set diffopt+=vertical
 
-" Fucking great lint plugin
-Plug 'w0rp/ale', { 'do': 'npm install -g eslint_d' }
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-let g:ale_change_sign_column_color = 1
-let g:ale_statusline_format = ['✕ %d', '⚠ %d', '✔ ok']
-let g:ale_javascript_eslint_use_global = 1
-let g:ale_javascript_eslint_executable = 'eslint_d'
-let g:ale_linters = {
-            \   'javascript': ['eslint', 'flow'],
-            \}
-
 " Is all about surroundings: parentheses, brackets, quotes, XML tags, and more.
 Plug 'tpope/vim-surround'
 
@@ -53,23 +47,82 @@ Plug 'editorconfig/editorconfig-vim'
 " Comment your code lines
 Plug 'scrooloose/nerdcommenter'
 
-" Status line with bufferline support
+" Devicons in the files
+Plug 'ryanoasis/vim-devicons'
+let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+let g:DevIconsEnableFolderExtensionPatternMatching = 1
+
+function! MyFiletype()
+    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
+
+function! MyFileformat()
+    return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
+
+" ALE: Fucking great lint plugin
+Plug 'w0rp/ale', { 'do': 'npm install -g eslint_d' }
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+let g:ale_statusline_format = ['✕ %d', '⚠ %d', '✔ ok']
+let g:ale_javascript_eslint_use_global = 1
+let g:ale_javascript_eslint_executable = 'eslint_d'
+let g:ale_linters = {
+            \   'javascript': ['eslint', 'flow'],
+            \}
+let g:ale_sign_warning = '▲'
+let g:ale_sign_error = '✗'
+highlight link ALEWarningSign String
+highlight link ALEErrorSign Title
+
+function! LightlineLinterWarnings() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+    return l:counts.total == 0 ? '' : printf('%d ◆', all_non_errors)
+endfunction
+
+function! LightlineLinterErrors() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+    return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
+endfunction
+
+function! LightlineLinterOK() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+    return l:counts.total == 0 ? '✓' : ''
+endfunction
+
+" Lightline
 Plug 'itchyny/lightline.vim'
-Plug 'mgee/lightline-bufferline'
+" Status line with bufferline support
+Plug 'taohex/lightline-buffer'
+
 let g:lightline = {
             \ 'colorscheme': 'Dracula',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'fugitive', 'readonly', 'filename', 'ale', 'gtm', 'modified', 'cap', 'gutentags' ] ]
+            \             [ 'fugitive', 'readonly', 'filename', 'linter_warnings', 'linter_errors', 'linter_ok', 'gtm', 'modified', 'cap', 'gutentags' ] ]
             \ },
             \ 'component': {
             \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
             \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
             \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
-            \   'ale': '%{ALEGetStatusLine()}',
             \   'gtm': '%{exists("*GTMStatusline")?GTMStatusline():""}',
             \   'cap': '%{vimcaps#statusline(-3)}',
             \   'gutentags': '%{exists("*gutentags#statusline")?gutentags#statusline("ctags..."):""}'
+            \ },
+            \ 'component_function': {
+            \   'filetype': 'MyFiletype',
+            \   'fileformat': 'MyFileformat',
+            \   'bufferbefore': 'lightline#buffer#bufferbefore',
+            \   'bufferafter': 'lightline#buffer#bufferafter',
+            \   'bufferinfo': 'lightline#buffer#bufferinfo',
             \ },
             \ 'component_visible_condition': {
             \   'readonly': '(&filetype!="help"&& &readonly)',
@@ -78,23 +131,34 @@ let g:lightline = {
             \   'gtm': '(exists("GTMStatusline") && ""!=GTMStatusline())',
             \   'gutentags': '(exists("*gutentags#statusline") && (gutentags#statusline("show") == "show"))'
             \ },
-            \ 'tabline': {'left': [['buffers']], 'right': [['']]},
-            \ 'component_expand': {'buffers': 'lightline#bufferline#buffers'},
-            \ 'component_type': {'buffers': 'tabsel'}
+            \ 'component_expand': {
+            \   'buffercurrent': 'lightline#buffer#buffercurrent2',
+            \   'linter_warnings': 'LightlineLinterWarnings',
+            \   'linter_errors': 'LightlineLinterErrors',
+            \   'linter_ok': 'LightlineLinterOK'
+            \ },
+            \ 'component_type': {
+            \   'buffercurrent': 'tabsel',
+            \   'linter_warnings': 'warning',
+            \   'linter_errors': 'error'
+            \ },
+            \ 'tabline': {'left': [[ 'bufferinfo' ], [ 'bufferbefore', 'buffercurrent', 'bufferafter' ]], 'right': [['']]}
             \ }
+
+autocmd User ALELint call lightline#update()
 
 " Emmet suport, remember: <C-Z>,
 Plug 'mattn/emmet-vim'
 let g:user_emmet_leader_key='<C-Z>'
 
-" tagbar
-Plug 'majutsushi/tagbar'
-nnoremap <F8> :TagbarToggle<CR>
-
-" automatic ctags
-Plug 'ludovicchabant/vim-gutentags'
-
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" autocomplete
+if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+endif
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_refresh_always = 1
 let g:deoplete#file#enable_buffer_path = 1
@@ -106,13 +170,14 @@ set shortmess+=c
 set pumheight=15
 
 Plug 'Shougo/echodoc.vim'
-let g:echodoc_enable_at_startup = 1
+set noshowmode
+let g:echodoc#enable_at_startup = 1
 
 "Typescript Plugins
 Plug 'mhartington/nvim-typescript', {
             \'do': ':UpdateRemotePlugins'
             \}
-let g:nvim_typescript#javascript_support = 1
+let g:nvim_typescript#javascript_support = 0
 
 " Create jsdoc
 Plug 'heavenshell/vim-jsdoc'
@@ -150,7 +215,7 @@ Plug 'matze/vim-move'
 " Search plugins
 Plug 'mileszs/ack.vim', { 'do': 'sudo pacman -S --noconfirm the_silver_searcher' }
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+    let g:ackprg = 'ag --vimgrep'
 endif
 
 " Amazing search and replace plugin, the command is: CtrlSF <search_value>
@@ -188,7 +253,7 @@ Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascript.jsx'] }
 let g:vim_jsx_pretty_colorful_config = 1
 
 Plug 'leafgarland/typescript-vim'
-Plug 'fleischie/vim-styled-components'
+"Plug 'styled-components/vim-styled-components', { 'branch': 'rewrite' }
 Plug 'jwalton512/vim-blade'
 Plug 'othree/html5.vim'
 Plug 'keith/tmux.vim'
@@ -196,9 +261,20 @@ Plug 'dag/vim-fish'
 Plug 'rust-lang/rust.vim'
 Plug 'chase/vim-ansible-yaml'
 Plug 'neovimhaskell/haskell-vim'
+Plug 'ekalinin/Dockerfile.vim'
 
 " themes
 Plug 'dracula/vim'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'mhartington/oceanic-next'
+let g:oceanic_next_terminal_bold = 1
+let g:oceanic_next_terminal_italic = 1
+Plug 'joshdick/onedark.vim'
 
 call plug#end()
+
+"denite configuration
+"call denite#custom#var('file_rec', 'command',
+"\ ['ag', '--hidden', '--ignore', '.git',
+"\ '--ignore', 'node_modules', '--follow',
+"\ '--nocolor', '--nogroup', '-g', ''])

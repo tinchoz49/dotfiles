@@ -12,6 +12,7 @@ dynamic_title = true
 urgent_on_bell = true
 clickable_url = false
 font = MesloLGSDZ Nerd Font 14
+#font = Iosevka Regular 14
 scrollback_lines = 1000
 search_wrap = true
 
@@ -24,7 +25,6 @@ cursor_shape = block
 browser = google-chrome-stable
 
 [colors]
-
 # https://critical.ch/xterm/
 
 # special
