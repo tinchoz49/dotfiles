@@ -11,6 +11,7 @@ set showtabline=2
 syntax on
 set background=dark
 colorscheme dracula
+set lazyredraw
 set nocursorline
 set lazyredraw
 set nobackup
@@ -18,7 +19,7 @@ set nowritebackup
 set noswapfile
 set ignorecase " Case sensitive search
 set smartcase " Case sensitive when uc present
-set nowrap " Do not wrap long lines
+set nowrap " No wrap long lines
 set number " Line numbers on
 set relativenumber " Relative numbers on
 set hidden " Allow buffer switching without saving
@@ -30,10 +31,10 @@ set softtabstop=4 " number of spaces to use for autoindenting
 
 " search on visual selector text
 function! s:VSetSearch(cmdtype)
-  let temp = @s
-  norm! gv"sy
-  let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
-  let @s = temp
+    let temp = @s
+    norm! gv"sy
+    let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
+    let @s = temp
 endfunction
 
 xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
@@ -51,3 +52,6 @@ nnoremap <C-z> <nop>
 
 " use hjs extension with haskell syntax
 au BufNewFile,BufRead *.hjs setlocal ft=haskell
+
+" Use a VimLeave autocommand to set the cursor style when Nvim exits
+au VimLeave * set guicursor=a:block-blinkon0

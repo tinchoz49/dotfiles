@@ -4,8 +4,11 @@ oh-my-fish/plugin-config
 fisherman/fzf
 fisherman/get
 fisherman/getopts
+oh-my-fish/plugin-git-flow
 fisherman/last_job_id
 nyarly/fish-lookup
 rafaelrinaldi/pure
+fisherman/rvm
 fisherman/spin
+sagebind/tmux-zen
 fisherman/upto

@@ -70,7 +70,7 @@ let g:ale_statusline_format = ['✕ %d', '⚠ %d', '✔ ok']
 let g:ale_javascript_eslint_use_global = 1
 let g:ale_javascript_eslint_executable = 'eslint_d'
 let g:ale_linters = {
-            \   'javascript': ['eslint', 'flow'],
+            \   'javascript': ['eslint'],
             \}
 let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
@@ -115,14 +115,14 @@ let g:lightline = {
             \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
             \   'gtm': '%{exists("*GTMStatusline")?GTMStatusline():""}',
             \   'cap': '%{vimcaps#statusline(-3)}',
-            \   'gutentags': '%{exists("*gutentags#statusline")?gutentags#statusline("ctags..."):""}'
+            \   'gutentags': '%{exists("*gutentags#statusline")?gutentags#statusline("ctags..."):""}',
+            \   'separator': '',
+            \   'buffers': 'buffers'
             \ },
             \ 'component_function': {
             \   'filetype': 'MyFiletype',
             \   'fileformat': 'MyFileformat',
-            \   'bufferbefore': 'lightline#buffer#bufferbefore',
-            \   'bufferafter': 'lightline#buffer#bufferafter',
-            \   'bufferinfo': 'lightline#buffer#bufferinfo',
+            \   'bufferinfo': 'lightline#buffer#bufferinfo'
             \ },
             \ 'component_visible_condition': {
             \   'readonly': '(&filetype!="help"&& &readonly)',
@@ -132,18 +132,27 @@ let g:lightline = {
             \   'gutentags': '(exists("*gutentags#statusline") && (gutentags#statusline("show") == "show"))'
             \ },
             \ 'component_expand': {
-            \   'buffercurrent': 'lightline#buffer#buffercurrent2',
+            \   'buffercurrent': 'lightline#buffer#buffercurrent',
+            \   'bufferbefore': 'lightline#buffer#bufferbefore',
+            \   'bufferafter': 'lightline#buffer#bufferafter',
             \   'linter_warnings': 'LightlineLinterWarnings',
             \   'linter_errors': 'LightlineLinterErrors',
             \   'linter_ok': 'LightlineLinterOK'
             \ },
             \ 'component_type': {
             \   'buffercurrent': 'tabsel',
+            \   'bufferbefore': 'raw',
+            \   'bufferafter': 'raw',
             \   'linter_warnings': 'warning',
             \   'linter_errors': 'error'
             \ },
-            \ 'tabline': {'left': [[ 'bufferinfo' ], [ 'bufferbefore', 'buffercurrent', 'bufferafter' ]], 'right': [['']]}
+            \ 'tabline': {
+            \   'left': [ [ 'bufferinfo' ],
+            \             [ 'separator' ],
+            \             [ 'bufferbefore', 'buffercurrent', 'bufferafter' ], ],
+            \   'right': [ [ 'buffers' ], ],
             \ }
+        \ }
 
 autocmd User ALELint call lightline#update()
 
@@ -248,28 +257,32 @@ Plug 'suxpert/vimcaps'
 
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 let g:javascript_plugin_jsdoc = 1
-let g:javascript_plugin_flow = 1
 Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascript.jsx'] }
 let g:vim_jsx_pretty_colorful_config = 1
 
+Plug 'alvan/vim-closetag'
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.erb,*.jsx,*.js"
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.erb,*.js'
+
 Plug 'leafgarland/typescript-vim'
-"Plug 'styled-components/vim-styled-components', { 'branch': 'rewrite' }
-Plug 'jwalton512/vim-blade'
-Plug 'othree/html5.vim'
-Plug 'keith/tmux.vim'
+""Plug 'styled-components/vim-styled-components', { 'branch': 'rewrite' }
+"Plug 'jwalton512/vim-blade'
+"Plug 'othree/html5.vim'
+"Plug 'keith/tmux.vim'
 Plug 'dag/vim-fish'
 Plug 'rust-lang/rust.vim'
-Plug 'chase/vim-ansible-yaml'
-Plug 'neovimhaskell/haskell-vim'
+"Plug 'chase/vim-ansible-yaml'
+"Plug 'neovimhaskell/haskell-vim'
 Plug 'ekalinin/Dockerfile.vim'
+Plug 'tpope/vim-haml'
 
 " themes
 Plug 'dracula/vim'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'mhartington/oceanic-next'
-let g:oceanic_next_terminal_bold = 1
-let g:oceanic_next_terminal_italic = 1
-Plug 'joshdick/onedark.vim'
+"Plug 'NLKNguyen/papercolor-theme'
+"Plug 'mhartington/oceanic-next'
+"let g:oceanic_next_terminal_bold = 1
+"let g:oceanic_next_terminal_italic = 1
+"Plug 'joshdick/onedark.vim'
 
 call plug#end()
 
