@@ -72,10 +72,16 @@ let g:ale_javascript_eslint_executable = 'eslint_d'
 let g:ale_linters = {
             \   'javascript': ['eslint'],
             \}
+let g:ale_dockerfile_hadolint_use_docker = 'yes'
 let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
 highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
+let g:ale_fixers = {
+    \   'javascript': ['eslint'],
+    \   'ruby': ['rubocop']
+    \}
+nnoremap <C-f> :ALEFix<CR>
 
 function! LightlineLinterWarnings() abort
     let l:counts = ale#statusline#Count(bufnr(''))
@@ -200,13 +206,12 @@ Plug 'ntpeters/vim-better-whitespace'
 autocmd BufWritePre * StripWhitespace
 
 " Format your code
-Plug 'sbdchd/neoformat'
-let g:neoformat_basic_format_align = 1 " Enable alignment
-let g:neoformat_basic_format_retab = 1 " Enable tab to spaces conversion
-let g:neoformat_basic_format_trim = 1 " Enable trimmming of trailing whitespace
-let g:neoformat_try_formatprg = 1
-let g:neoformat_enabled_javascript = ['eslint_d']
-nnoremap <C-f> :Neoformat<CR>
+"Plug 'sbdchd/neoformat'
+"let g:neoformat_basic_format_align = 1 " Enable alignment
+"let g:neoformat_basic_format_retab = 1 " Enable tab to spaces conversion
+"let g:neoformat_basic_format_trim = 1 " Enable trimmming of trailing whitespace
+"let g:neoformat_try_formatprg = 1
+"let g:neoformat_enabled_javascript = ['eslint_d']
 
 " Match html tags
 Plug 'Valloric/MatchTagAlways'
@@ -275,6 +280,7 @@ Plug 'rust-lang/rust.vim'
 "Plug 'neovimhaskell/haskell-vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'tpope/vim-haml'
+Plug 'cespare/vim-toml'
 
 " themes
 Plug 'dracula/vim'
