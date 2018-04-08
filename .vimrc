@@ -16,6 +16,7 @@ set nocursorline
 set lazyredraw
 set nobackup
 set nowritebackup
+set backupcopy=yes
 set noswapfile
 set ignorecase " Case sensitive search
 set smartcase " Case sensitive when uc present

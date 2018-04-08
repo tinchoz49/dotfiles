@@ -9,25 +9,29 @@ alias docker:stop 'sudo systemctl stop docker'
 alias docker:volume-lso 'docker volume ls -qf dangling=true'
 alias docker:volume-rmo 'docker volume rm (docker volume ls -qf dangling=true)'
 alias docker:container-kall 'docker stop (docker ps -a -q); and docker rm (docker ps -a -q)'
+alias docker:node-box 'docker run --rm -v $PWD:/src -w /src -u node -it node bash'
 alias rn:reload 'adb connect (adb shell ip route | awk \'{print $9}\'); adb shell input keyevent 82; adb shell input keyevent 23; adb shell input keyevent 23';
 
 set -x VISUAL "nvim"
 set -x NVM_DIR "$HOME/.nvm"
-function nvm
-    if test -e "$NVM_DIR/nvm.sh"
-        bass source "$NVM_DIR/nvm.sh" --no-use ';' nvm $argv
-    end
-end
-bass source "$NVM_DIR/nvm.sh"
+set -x EDITOR "nvim"
+#function nvm
+    #if test -e "$NVM_DIR/nvm.sh"
+        #bass source "$NVM_DIR/nvm.sh" --no-use ';' nvm $argv
+    #end
+#end
+#bass source "$NVM_DIR/nvm.sh"
 
 set -x ANDROID_HOME ~/apps/android/sdk
+set -x GOENV_ROOT ~/.goenv
 set -x GOPATH ~/.gocode
 set -x CARGO ~/.cargo/bin
 set -x COMPOSER_BIN ~/.config/composer/vendor/bin
 set -x RUBY_BIN ~/.gem/ruby/2.3.0/bin
 set -x JAVA_BIN /usr/lib/jvm/java-8-openjdk/bin
+set -x NNN_USE_EDITOR 1
 
-set PATH $PATH $CARGO $COMPOSER_BIN $RUBY_BIN $GOPATH/bin
+set PATH $PATH $CARGO $COMPOSER_BIN $RUBY_BIN $GOPATH/bin $GOENV_ROOT/bin
 
 # android staff
 set PATH $PATH $JAVA_BIN $ANDROID_HOME/tools $ANDROID_HOME/platform-tools ~/.local/bin

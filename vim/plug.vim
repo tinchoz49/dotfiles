@@ -63,14 +63,14 @@ function! MyFileformat()
 endfunction
 
 " ALE: Fucking great lint plugin
-Plug 'w0rp/ale', { 'do': 'npm install -g eslint_d' }
+Plug 'w0rp/ale', { 'do': 'npm install -g eslint_d prettier-standard' }
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let g:ale_statusline_format = ['✕ %d', '⚠ %d', '✔ ok']
 let g:ale_javascript_eslint_use_global = 1
 let g:ale_javascript_eslint_executable = 'eslint_d'
 let g:ale_linters = {
-            \   'javascript': ['eslint'],
+            \   'javascript': ['eslint', 'standard'],
             \}
 let g:ale_dockerfile_hadolint_use_docker = 'yes'
 let g:ale_sign_warning = '▲'
@@ -78,7 +78,8 @@ let g:ale_sign_error = '✗'
 highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
 let g:ale_fixers = {
-    \   'javascript': ['eslint'],
+    \   'javascript': ['eslint', 'prettier-standard'],
+    \   'json': ['prettier'],
     \   'ruby': ['rubocop']
     \}
 nnoremap <C-f> :ALEFix<CR>
@@ -119,7 +120,6 @@ let g:lightline = {
             \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
             \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
             \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
-            \   'gtm': '%{exists("*GTMStatusline")?GTMStatusline():""}',
             \   'cap': '%{vimcaps#statusline(-3)}',
             \   'gutentags': '%{exists("*gutentags#statusline")?gutentags#statusline("ctags..."):""}',
             \   'separator': '',
@@ -134,7 +134,6 @@ let g:lightline = {
             \   'readonly': '(&filetype!="help"&& &readonly)',
             \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
             \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
-            \   'gtm': '(exists("GTMStatusline") && ""!=GTMStatusline())',
             \   'gutentags': '(exists("*gutentags#statusline") && (gutentags#statusline("show") == "show"))'
             \ },
             \ 'component_expand': {
@@ -157,23 +156,18 @@ let g:lightline = {
             \             [ 'separator' ],
             \             [ 'bufferbefore', 'buffercurrent', 'bufferafter' ], ],
             \   'right': [ [ 'buffers' ], ],
-            \ }
+            \ },
+            \ 'tabline_separator': { 'left': '' }
         \ }
 
 autocmd User ALELint call lightline#update()
 
-" Emmet suport, remember: <C-Z>,
+" Emmet suport, remember: <c-z,>,
 Plug 'mattn/emmet-vim'
 let g:user_emmet_leader_key='<C-Z>'
 
 " autocomplete
-if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-endif
+Plug 'Shougo/deoplete.nvim', { 'tag': '4.0-serial', 'do': ':UpdateRemotePlugins' }
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_refresh_always = 1
 let g:deoplete#file#enable_buffer_path = 1
@@ -193,6 +187,9 @@ Plug 'mhartington/nvim-typescript', {
             \'do': ':UpdateRemotePlugins'
             \}
 let g:nvim_typescript#javascript_support = 0
+
+"Rust autocomplete
+Plug 'sebastianmarkow/deoplete-rust'
 
 " Create jsdoc
 Plug 'heavenshell/vim-jsdoc'
@@ -239,9 +236,9 @@ Plug 'dyng/ctrlsf.vim'
 Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
 
 " Simple, seamless, lightweight time tracking for Git
-Plug 'git-time-metric/gtm-vim-plugin'
+"Plug 'git-time-metric/gtm-vim-plugin'
 " gtm time spend
-let g:gtm_plugin_status_enabled = 0
+"let g:gtm_plugin_status_enabled = 0
 
 " mappings for ex commands
 " ]q is :cnext. [q is :cprevious. ]a is :next. [b is :bprevious
@@ -281,6 +278,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'tpope/vim-haml'
 Plug 'cespare/vim-toml'
+Plug 'jparise/vim-graphql'
 
 " themes
 Plug 'dracula/vim'
