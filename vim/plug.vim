@@ -70,18 +70,19 @@ let g:ale_statusline_format = ['✕ %d', '⚠ %d', '✔ ok']
 let g:ale_javascript_eslint_use_global = 1
 let g:ale_javascript_eslint_executable = 'eslint_d'
 let g:ale_linters = {
-            \   'javascript': ['eslint', 'standard'],
-            \}
+  \ 'javascript': ['eslint', 'standard']
+\}
 let g:ale_dockerfile_hadolint_use_docker = 'yes'
 let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
 highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
 let g:ale_fixers = {
-    \   'javascript': ['eslint', 'prettier-standard'],
-    \   'json': ['prettier'],
-    \   'ruby': ['rubocop']
-    \}
+  \ 'javascript': ['eslint', 'prettier-standard'],
+  \ 'json': ['prettier'],
+  \ 'ruby': ['rubocop'],
+  \ 'rust': ['rustfmt']
+\}
 nnoremap <C-f> :ALEFix<CR>
 
 function! LightlineLinterWarnings() abort
@@ -167,7 +168,7 @@ Plug 'mattn/emmet-vim'
 let g:user_emmet_leader_key='<C-Z>'
 
 " autocomplete
-Plug 'Shougo/deoplete.nvim', { 'tag': '4.0-serial', 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_refresh_always = 1
 let g:deoplete#file#enable_buffer_path = 1
@@ -181,15 +182,6 @@ set pumheight=15
 Plug 'Shougo/echodoc.vim'
 set noshowmode
 let g:echodoc#enable_at_startup = 1
-
-"Typescript Plugins
-Plug 'mhartington/nvim-typescript', {
-            \'do': ':UpdateRemotePlugins'
-            \}
-let g:nvim_typescript#javascript_support = 0
-
-"Rust autocomplete
-Plug 'sebastianmarkow/deoplete-rust'
 
 " Create jsdoc
 Plug 'heavenshell/vim-jsdoc'
@@ -255,24 +247,33 @@ Plug 'tpope/vim-eunuch'
 " Never be bothered by caps lock
 Plug 'suxpert/vimcaps'
 
-" extra syntax
-
-Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
-let g:javascript_plugin_jsdoc = 1
-Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascript.jsx'] }
-let g:vim_jsx_pretty_colorful_config = 1
-
 Plug 'alvan/vim-closetag'
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.erb,*.jsx,*.js"
 let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.erb,*.js'
 
+" syntax language
+
+" javascript / typescript
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+let g:javascript_plugin_jsdoc = 1
+Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascript.jsx'] }
+let g:vim_jsx_pretty_colorful_config = 1
 Plug 'leafgarland/typescript-vim'
+"Plug 'mhartington/nvim-typescript', {
+      "\'do': ':UpdateRemotePlugins'
+      "\}
+"let g:nvim_typescript#javascript_support = 1
 ""Plug 'styled-components/vim-styled-components', { 'branch': 'rewrite' }
+
+" Rust
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
+Plug 'roxma/nvim-cm-racer'
+
 "Plug 'jwalton512/vim-blade'
 "Plug 'othree/html5.vim'
 "Plug 'keith/tmux.vim'
 Plug 'dag/vim-fish'
-Plug 'rust-lang/rust.vim'
 "Plug 'chase/vim-ansible-yaml'
 "Plug 'neovimhaskell/haskell-vim'
 Plug 'ekalinin/Dockerfile.vim'
