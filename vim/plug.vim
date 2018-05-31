@@ -1,18 +1,12 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_working_path_mode = 'a'
-if executable('ag')
-    let g:ctrlp_use_caching = 0
-    set grepprg=ag\ --nogroup\ --nocolor\ --hidden\ --ignore\ node_modules\
-    let g:ctrlp_user_command = 'ag %s -l --hidden --ignore .git --ignore node_modules -g ""'
-else
-    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-    let g:ctrlp_prompt_mappings = {
-                \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
-                \ }
-endif
+" prev: sudo pacman -S fzf fd
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+map <C-p> :Files<CR>
+map <Leader>p :Commands<CR>
+map <Leader>f :BLines<CR>
+map <Leader>b :Buffers<CR>
 
 " Better way to work with copy and paste in vim
 Plug 'svermeulen/vim-easyclip'
@@ -194,14 +188,6 @@ Plug 'ntpeters/vim-better-whitespace'
 " whitestrip on save
 autocmd BufWritePre * StripWhitespace
 
-" Format your code
-"Plug 'sbdchd/neoformat'
-"let g:neoformat_basic_format_align = 1 " Enable alignment
-"let g:neoformat_basic_format_retab = 1 " Enable tab to spaces conversion
-"let g:neoformat_basic_format_trim = 1 " Enable trimmming of trailing whitespace
-"let g:neoformat_try_formatprg = 1
-"let g:neoformat_enabled_javascript = ['eslint_d']
-
 " Match html tags
 Plug 'Valloric/MatchTagAlways'
 let g:mta_filetypes = {
@@ -226,11 +212,6 @@ Plug 'dyng/ctrlsf.vim'
 
 " Livepreview to markdown
 Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
-
-" Simple, seamless, lightweight time tracking for Git
-"Plug 'git-time-metric/gtm-vim-plugin'
-" gtm time spend
-"let g:gtm_plugin_status_enabled = 0
 
 " mappings for ex commands
 " ]q is :cnext. [q is :cprevious. ]a is :next. [b is :bprevious
@@ -259,10 +240,11 @@ let g:javascript_plugin_jsdoc = 1
 Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascript.jsx'] }
 let g:vim_jsx_pretty_colorful_config = 1
 Plug 'leafgarland/typescript-vim'
-"Plug 'mhartington/nvim-typescript', {
-      "\'do': ':UpdateRemotePlugins'
-      "\}
-"let g:nvim_typescript#javascript_support = 1
+Plug 'mhartington/nvim-typescript', {
+  \'branch': 'next-node',
+  \'do': ':UpdateRemotePlugins && cd rplugin/node/nvim_typescript && npm install --no-package-lock'
+  \}
+let g:nvim_typescript#javascript_support = 1
 ""Plug 'styled-components/vim-styled-components', { 'branch': 'rewrite' }
 
 " Rust
@@ -270,12 +252,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 Plug 'roxma/nvim-cm-racer'
 
-"Plug 'jwalton512/vim-blade'
-"Plug 'othree/html5.vim'
-"Plug 'keith/tmux.vim'
 Plug 'dag/vim-fish'
-"Plug 'chase/vim-ansible-yaml'
-"Plug 'neovimhaskell/haskell-vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'tpope/vim-haml'
 Plug 'cespare/vim-toml'
@@ -283,16 +260,5 @@ Plug 'jparise/vim-graphql'
 
 " themes
 Plug 'dracula/vim'
-"Plug 'NLKNguyen/papercolor-theme'
-"Plug 'mhartington/oceanic-next'
-"let g:oceanic_next_terminal_bold = 1
-"let g:oceanic_next_terminal_italic = 1
-"Plug 'joshdick/onedark.vim'
 
 call plug#end()
-
-"denite configuration
-"call denite#custom#var('file_rec', 'command',
-"\ ['ag', '--hidden', '--ignore', '.git',
-"\ '--ignore', 'node_modules', '--follow',
-"\ '--nocolor', '--nogroup', '-g', ''])

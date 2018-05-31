@@ -55,4 +55,4 @@ function emulator
     eval (dirname (which emulator))/emulator $argv
 end
 
-set -x FZF_DEFAULT_COMMAND 'ag --hidden --ignore .git --ignore node_modules -g ""'
+set -x FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
