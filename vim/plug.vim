@@ -241,8 +241,7 @@ Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascript.jsx'] }
 let g:vim_jsx_pretty_colorful_config = 1
 Plug 'leafgarland/typescript-vim'
 Plug 'mhartington/nvim-typescript', {
-  \'branch': 'next-node',
-  \'do': 'cd rplugin/node/nvim_typescript && npm install --production --no-package-lock'
+  \'do': 'npm install -g neovim typescript'
   \}
 let g:nvim_typescript#javascript_support = 1
 ""Plug 'styled-components/vim-styled-components', { 'branch': 'rewrite' }
