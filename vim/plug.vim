@@ -102,6 +102,7 @@ endfunction
 
 " Lightline
 Plug 'itchyny/lightline.vim'
+
 " Status line with bufferline support
 Plug 'taohex/lightline-buffer'
 
@@ -177,6 +178,16 @@ Plug 'Shougo/echodoc.vim'
 set noshowmode
 let g:echodoc#enable_at_startup = 1
 
+" autocomplete JavaScript / TypeScript
+Plug 'mhartington/nvim-typescript', {
+  \'do': 'npm install -g neovim typescript'
+  \}
+let g:nvim_typescript#javascript_support = 1
+
+" autocomplete Rust
+Plug 'racer-rust/vim-racer'
+Plug 'roxma/nvim-cm-racer'
+
 " Create jsdoc
 Plug 'heavenshell/vim-jsdoc'
 nmap <silent> <C-l> <Plug>(jsdoc)
@@ -233,29 +244,7 @@ let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.erb,*.jsx,*.js"
 let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.erb,*.js'
 
 " syntax language
-
-" javascript / typescript
-Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
-let g:javascript_plugin_jsdoc = 1
-Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascript.jsx'] }
-let g:vim_jsx_pretty_colorful_config = 1
-Plug 'leafgarland/typescript-vim'
-Plug 'mhartington/nvim-typescript', {
-  \'do': 'npm install -g neovim typescript'
-  \}
-let g:nvim_typescript#javascript_support = 1
-""Plug 'styled-components/vim-styled-components', { 'branch': 'rewrite' }
-
-" Rust
-Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
-Plug 'roxma/nvim-cm-racer'
-
-Plug 'dag/vim-fish'
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'tpope/vim-haml'
-Plug 'cespare/vim-toml'
-Plug 'jparise/vim-graphql'
+Plug 'sheerun/vim-polyglot'
 
 " themes
 Plug 'dracula/vim'
