@@ -13,9 +13,19 @@ Plug 'svermeulen/vim-easyclip'
 
 " A tree explorer plugin for vim.
 Plug 'scrooloose/nerdtree'
-map <Leader>n :NERDTreeFind<CR>
+map <Leader>n :call OpenNerdTreeOnLastBuffer()<CR>
 let g:NERDTreeMouseMode = 2
 let g:NERDTreeMapMenu='M'
+function! IsNerdTreeEnabled()
+    return exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1
+endfunction
+function! OpenNerdTreeOnLastBuffer()
+  let bufferPath = expand('%:p')
+  :NERDTreeToggle
+  if (IsNerdTreeEnabled())
+    :execute ':NERDTreeFind ' . bufferPath
+  endif
+endfunction
 
 " Git support for nerdtree
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -57,7 +67,7 @@ function! MyFileformat()
 endfunction
 
 " ALE: Fucking great lint plugin
-Plug 'w0rp/ale', { 'do': 'npm install -g eslint_d prettier-standard' }
+Plug 'w0rp/ale', { 'do': 'npm install -g eslint_d' }
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let g:ale_statusline_format = ['✕ %d', '⚠ %d', '✔ ok']
@@ -71,8 +81,9 @@ let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
 highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
+"\ 'javascript': ['eslint', 'prettier-standard'],
 let g:ale_fixers = {
-  \ 'javascript': ['eslint', 'prettier-standard'],
+  \ 'javascript': ['eslint', 'standard'],
   \ 'json': ['prettier'],
   \ 'ruby': ['rubocop'],
   \ 'rust': ['rustfmt']
@@ -104,7 +115,7 @@ endfunction
 Plug 'itchyny/lightline.vim'
 
 " Status line with bufferline support
-Plug 'taohex/lightline-buffer'
+Plug 'taohexxx/lightline-buffer'
 
 let g:lightline = {
             \ 'colorscheme': 'Dracula',
@@ -182,7 +193,7 @@ let g:echodoc#enable_at_startup = 1
 Plug 'mhartington/nvim-typescript', {
   \'do': 'npm install -g neovim typescript'
   \}
-let g:nvim_typescript#javascript_support = 1
+let g:nvim_typescript#javascript_support = 0
 
 " autocomplete Rust
 Plug 'racer-rust/vim-racer'
@@ -220,6 +231,9 @@ endif
 
 " Amazing search and replace plugin, the command is: CtrlSF <search_value>
 Plug 'dyng/ctrlsf.vim'
+let g:ctrlsf_extra_backend_args = {
+  \ 'ag': '--hidden'
+  \ }
 
 " Livepreview to markdown
 Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }

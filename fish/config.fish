@@ -55,4 +55,21 @@ function emulator
     eval (dirname (which emulator))/emulator $argv
 end
 
+function git_branch_delete_by
+  for val in (git branch --list "$argv/*")
+      git branch -D (string trim $val)
+  end
+end
+
 set -x FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
+
+# tabtab source for yarn package
+# uninstall by removing these lines or running `tabtab uninstall yarn`
+[ -f /home/tincho/.nvm/versions/node/v8.11.1/lib/node_modules/yarn-completions/node_modules/tabtab/.completions/yarn.fish ]; and . /home/tincho/.nvm/versions/node/v8.11.1/lib/node_modules/yarn-completions/node_modules/tabtab/.completions/yarn.fish
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[ -f /home/tincho/projects/geut/darkstar/node_modules/tabtab/.completions/serverless.fish ]; and . /home/tincho/projects/geut/darkstar/node_modules/tabtab/.completions/serverless.fish
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[ -f /home/tincho/projects/geut/darkstar/node_modules/tabtab/.completions/sls.fish ]; and . /home/tincho/projects/geut/darkstar/node_modules/tabtab/.completions/sls.fish
