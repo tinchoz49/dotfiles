@@ -66,97 +66,80 @@ function! MyFileformat()
     return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
 
-" ALE: Fucking great lint plugin
+" ALE: Great lint plugin
 Plug 'w0rp/ale', { 'do': 'npm install -g eslint_d' }
 let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-let g:ale_statusline_format = ['✕ %d', '⚠ %d', '✔ ok']
 let g:ale_javascript_eslint_use_global = 1
 let g:ale_javascript_eslint_executable = 'eslint_d'
 let g:ale_linters = {
-  \ 'javascript': ['eslint', 'standard']
+  \ 'javascript': ['eslint']
 \}
 let g:ale_dockerfile_hadolint_use_docker = 'yes'
 let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
-highlight link ALEWarningSign String
-highlight link ALEErrorSign Title
-"\ 'javascript': ['eslint', 'prettier-standard'],
 let g:ale_fixers = {
-  \ 'javascript': ['eslint', 'standard'],
+  \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \ 'javascript': ['eslint'],
   \ 'json': ['prettier'],
   \ 'ruby': ['rubocop'],
   \ 'rust': ['rustfmt']
 \}
 nnoremap <C-f> :ALEFix<CR>
 
-function! LightlineLinterWarnings() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
-    return l:counts.total == 0 ? '' : printf('%d ◆', all_non_errors)
-endfunction
-
-function! LightlineLinterErrors() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
-    return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
-endfunction
-
-function! LightlineLinterOK() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
-    return l:counts.total == 0 ? '✓' : ''
-endfunction
-
 " Lightline
 Plug 'itchyny/lightline.vim'
 
+" Lightline ALE
+Plug 'maximbaz/lightline-ale'
+
 " Status line with bufferline support
 Plug 'taohexxx/lightline-buffer'
-
+" Show full path of filename
+function! FilenameForLightline()
+    return fnamemodify(expand('%'), ":.")
+endfunction
 let g:lightline = {
             \ 'colorscheme': 'Dracula',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'fugitive', 'readonly', 'filename', 'linter_warnings', 'linter_errors', 'linter_ok', 'gtm', 'modified', 'cap', 'gutentags' ] ]
+            \             [ 'fugitive', 'readonly', 'modified', 'filename' ] ],
+            \   'right': [ [ 'lineinfo' ],
+		        \              [ 'percent' ],
+		        \              [ 'fileformat', 'fileencoding', 'filetype' ],
+            \              [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ] ]
             \ },
             \ 'component': {
-            \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
-            \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
             \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
             \   'cap': '%{vimcaps#statusline(-3)}',
-            \   'gutentags': '%{exists("*gutentags#statusline")?gutentags#statusline("ctags..."):""}',
             \   'separator': '',
             \   'buffers': 'buffers'
             \ },
             \ 'component_function': {
+            \   'filename': 'FilenameForLightline',
             \   'filetype': 'MyFiletype',
             \   'fileformat': 'MyFileformat',
             \   'bufferinfo': 'lightline#buffer#bufferinfo'
             \ },
             \ 'component_visible_condition': {
-            \   'readonly': '(&filetype!="help"&& &readonly)',
-            \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-            \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
-            \   'gutentags': '(exists("*gutentags#statusline") && (gutentags#statusline("show") == "show"))'
+            \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
             \ },
             \ 'component_expand': {
             \   'buffercurrent': 'lightline#buffer#buffercurrent',
             \   'bufferbefore': 'lightline#buffer#bufferbefore',
             \   'bufferafter': 'lightline#buffer#bufferafter',
-            \   'linter_warnings': 'LightlineLinterWarnings',
-            \   'linter_errors': 'LightlineLinterErrors',
-            \   'linter_ok': 'LightlineLinterOK'
+            \   'linter_checking': 'lightline#ale#checking',
+            \   'linter_warnings': 'lightline#ale#warnings',
+            \   'linter_errors': 'lightline#ale#errors',
+            \   'linter_ok': 'lightline#ale#ok'
             \ },
             \ 'component_type': {
             \   'buffercurrent': 'tabsel',
             \   'bufferbefore': 'raw',
             \   'bufferafter': 'raw',
+            \   'linter_checking': 'left',
             \   'linter_warnings': 'warning',
-            \   'linter_errors': 'error'
+            \   'linter_errors': 'error',
+            \   'linter_ok': 'left'
             \ },
             \ 'tabline': {
             \   'left': [ [ 'bufferinfo' ],
@@ -166,8 +149,6 @@ let g:lightline = {
             \ },
             \ 'tabline_separator': { 'left': '' }
         \ }
-
-autocmd User ALELint call lightline#update()
 
 " Emmet suport, remember: <c-z,>,
 Plug 'mattn/emmet-vim'
@@ -190,10 +171,10 @@ set noshowmode
 let g:echodoc#enable_at_startup = 1
 
 " autocomplete JavaScript / TypeScript
-Plug 'mhartington/nvim-typescript', {
-  \'do': 'npm install -g neovim typescript'
-  \}
-let g:nvim_typescript#javascript_support = 0
+"Plug 'mhartington/nvim-typescript', {
+  "\'do': 'npm install -g neovim typescript'
+  "\}
+"let g:nvim_typescript#javascript_support = 0
 
 " autocomplete Rust
 Plug 'racer-rust/vim-racer'
@@ -262,5 +243,6 @@ Plug 'sheerun/vim-polyglot'
 
 " themes
 Plug 'dracula/vim'
+Plug 'NLKNguyen/papercolor-theme'
 
 call plug#end()

@@ -1,6 +1,4 @@
 fisherman/await
-edc/bass
-oh-my-fish/plugin-config
 fisherman/fishtape
 fisherman/fzf
 fisherman/get
@@ -13,3 +11,4 @@ rafaelrinaldi/pure
 fisherman/spin
 sagebind/tmux-zen
 fisherman/upto
+oh-my-fish/plugin-config

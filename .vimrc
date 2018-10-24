@@ -9,8 +9,8 @@ set mousehide  " hide when characters are typed
 set showtabline=2
 
 syntax on
-set background=dark
 colorscheme dracula
+set background=dark
 set lazyredraw
 set nocursorline
 set lazyredraw
