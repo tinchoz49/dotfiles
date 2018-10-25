@@ -62,6 +62,21 @@ function git_branch_delete_by
   end
 end
 
+function load_env --description 'Load environment variables from .env file'
+  set -l envfile ".env"
+  if [ (count $argv) -gt 0 ]
+    set envfile $argv[1]
+  end
+
+  if test -e $envfile
+    for line in (cat $envfile)
+      if not string match -q "#*" $line
+        set -xg (echo $line | cut -d = -f 1) (echo $line | cut -d = -f 2-)
+      end
+    end
+  end
+end
+
 set -x FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
 
 # tabtab source for yarn package
