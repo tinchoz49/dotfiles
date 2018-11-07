@@ -38,18 +38,13 @@ set PATH $PATH $CARGO $COMPOSER_BIN $RUBY_BIN $GOPATH/bin $GOENV_ROOT/bin
 #set PATH $PATH $JAVA_BIN $ANDROID_HOME/tools $ANDROID_HOME/platform-tools ~/.local/bin
 #$ANDROID_HOME/build-tools/25.0.3
 
-set fish_prompt_pwd_dir_length 3
-function __parse_current_folder -d "Replace '$HOME' with '~'"
-    prompt_pwd | sed "s|$HOME|~|"
-end
+#set fish_prompt_pwd_dir_length 3
+#function __parse_current_folder -d "Replace '$HOME' with '~'"
+    #prompt_pwd | sed "s|$HOME|~|"
+#end
 
 function fish_title
     prompt_pwd
-end
-
-function npm-do
-    set -lx PATH (npm bin) $PATH
-    eval $argv
 end
 
 function emulator
@@ -62,30 +57,9 @@ function git_branch_delete_by
   end
 end
 
-function load_env --description 'Load environment variables from .env file'
-  set -l envfile ".env"
-  if [ (count $argv) -gt 0 ]
-    set envfile $argv[1]
-  end
-
-  if test -e $envfile
-    for line in (cat $envfile)
-      if not string match -q "#*" $line
-        set -xg (echo $line | cut -d = -f 1) (echo $line | cut -d = -f 2-)
-      end
-    end
-  end
-end
-
 set -x FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
 
-# tabtab source for yarn package
-# uninstall by removing these lines or running `tabtab uninstall yarn`
-[ -f /home/tincho/.nvm/versions/node/v8.11.1/lib/node_modules/yarn-completions/node_modules/tabtab/.completions/yarn.fish ]; and . /home/tincho/.nvm/versions/node/v8.11.1/lib/node_modules/yarn-completions/node_modules/tabtab/.completions/yarn.fish
+# spacefish
+set SPACEFISH_PROMPT_ORDER time user dir host git package node rust docker kubecontext exec_time line_sep battery jobs exit_code char
 
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[ -f /home/tincho/projects/geut/darkstar/node_modules/tabtab/.completions/serverless.fish ]; and . /home/tincho/projects/geut/darkstar/node_modules/tabtab/.completions/serverless.fish
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[ -f /home/tincho/projects/geut/darkstar/node_modules/tabtab/.completions/sls.fish ]; and . /home/tincho/projects/geut/darkstar/node_modules/tabtab/.completions/sls.fish
+eval (direnv hook fish)

@@ -155,6 +155,16 @@ Plug 'mattn/emmet-vim'
 let g:user_emmet_leader_key='<C-Z>'
 
 " autocomplete
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+let g:LanguageClient_serverCommands = {
+\ 'rust': ['rustup', 'run', 'stable', 'rls'],
+\ 'javascript.jsx': ['javascript-typescript-stdio']
+\ }
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_refresh_always = 1
@@ -170,16 +180,6 @@ Plug 'Shougo/echodoc.vim'
 set noshowmode
 let g:echodoc#enable_at_startup = 1
 
-" autocomplete JavaScript / TypeScript
-"Plug 'mhartington/nvim-typescript', {
-  "\'do': 'npm install -g neovim typescript'
-  "\}
-"let g:nvim_typescript#javascript_support = 0
-
-" autocomplete Rust
-Plug 'racer-rust/vim-racer'
-Plug 'roxma/nvim-cm-racer'
-
 " Create jsdoc
 Plug 'heavenshell/vim-jsdoc'
 nmap <silent> <C-l> <Plug>(jsdoc)
@@ -193,13 +193,7 @@ autocmd BufWritePre * StripWhitespace
 
 " Match html tags
 Plug 'Valloric/MatchTagAlways'
-let g:mta_filetypes = {
-            \ 'html' : 1,
-            \ 'xhtml' : 1,
-            \ 'xml' : 1,
-            \ 'jinja' : 1,
-            \ 'blade' : 1
-            \}
+let g:mta_filetypes = { 'html' : 1, 'xhtml' : 1, 'xml' : 1 }
 
 " Move your code lines in a cool way
 Plug 'matze/vim-move'
@@ -212,9 +206,7 @@ endif
 
 " Amazing search and replace plugin, the command is: CtrlSF <search_value>
 Plug 'dyng/ctrlsf.vim'
-let g:ctrlsf_extra_backend_args = {
-  \ 'ag': '--hidden'
-  \ }
+let g:ctrlsf_extra_backend_args = { 'ag': '--hidden' }
 
 " Livepreview to markdown
 Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
