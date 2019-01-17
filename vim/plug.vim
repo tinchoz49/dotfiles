@@ -1,12 +1,24 @@
 call plug#begin('~/.vim/plugged')
 
-" prev: sudo pacman -S fzf fd
-Plug 'junegunn/fzf'
+" Fuzzy finder to filter the `fd` result
+Plug 'junegunn/fzf', { 'do': 'sudo pacman -S --noconfirm fzf fd' }
 Plug 'junegunn/fzf.vim'
 map <C-p> :Files<CR>
 map <Leader>p :Commands<CR>
 map <Leader>f :BLines<CR>
 map <Leader>b :Buffers<CR>
+
+" Search plugins
+Plug 'mileszs/ack.vim', { 'do': 'sudo pacman -S --noconfirm ripgrep' }
+let g:ackprg = 'rg -n --vimgrep'
+
+" Amazing search and replace plugin, the command is: CtrlSF <search_value>
+Plug 'dyng/ctrlsf.vim', { 'do': 'sudo pacman -S --noconfirm ripgrep' }
+let g:ctrlsf_ackprg = 'rg'
+"let g:ctrlsf_extra_backend_args = { 'rg': '--hidden' }
+
+" Livepreview to markdown
+Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
 
 " Better way to work with copy and paste in vim
 Plug 'svermeulen/vim-easyclip'
@@ -158,8 +170,11 @@ let g:user_emmet_leader_key='<C-Z>'
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 let g:LanguageClient_serverCommands = {
 \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-\ 'javascript.jsx': ['javascript-typescript-stdio']
+\ 'javascript.jsx': ['typescript-language-server', '--stdio']
 \ }
+let g:LanguageClient_diagnosticsEnable = 0
+
+"Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
@@ -198,19 +213,6 @@ let g:mta_filetypes = { 'html' : 1, 'xhtml' : 1, 'xml' : 1 }
 " Move your code lines in a cool way
 Plug 'matze/vim-move'
 
-" Search plugins
-Plug 'mileszs/ack.vim', { 'do': 'sudo pacman -S --noconfirm the_silver_searcher' }
-if executable('ag')
-    let g:ackprg = 'ag --vimgrep'
-endif
-
-" Amazing search and replace plugin, the command is: CtrlSF <search_value>
-Plug 'dyng/ctrlsf.vim'
-let g:ctrlsf_extra_backend_args = { 'ag': '--hidden' }
-
-" Livepreview to markdown
-Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
-
 " mappings for ex commands
 " ]q is :cnext. [q is :cprevious. ]a is :next. [b is :bprevious
 Plug 'tpope/vim-unimpaired'
@@ -232,6 +234,7 @@ let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.erb,*.js'
 
 " syntax language
 Plug 'sheerun/vim-polyglot'
+Plug 'Quramy/vim-js-pretty-template'
 
 " themes
 Plug 'dracula/vim'

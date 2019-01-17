@@ -51,10 +51,14 @@ function emulator
     eval (dirname (which emulator))/emulator $argv
 end
 
-function git_branch_delete_by
+function git_branch_delete_by -d "Delete all branches started with a prefix"
   for val in (git branch --list "$argv/*")
       git branch -D (string trim $val)
   end
+end
+
+function fishcognito
+    env fish_history='' fish
 end
 
 set -x FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
@@ -63,3 +67,10 @@ set -x FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
 set SPACEFISH_PROMPT_ORDER time user dir host git package node rust docker kubecontext exec_time line_sep battery jobs exit_code char
 
 eval (direnv hook fish)
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[ -f /home/tincho/projects/geut/wireline/darkstar/node_modules/tabtab/.completions/serverless.fish ]; and . /home/tincho/projects/geut/wireline/darkstar/node_modules/tabtab/.completions/serverless.fish
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[ -f /home/tincho/projects/geut/wireline/darkstar/node_modules/tabtab/.completions/sls.fish ]; and . /home/tincho/projects/geut/wireline/darkstar/node_modules/tabtab/.completions/sls.fish

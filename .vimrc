@@ -7,6 +7,7 @@ set termguicolors
 set mouse=a  " enable mouse
 set mousehide  " hide when characters are typed
 set showtabline=2
+set signcolumn=yes
 
 syntax on
 colorscheme dracula
