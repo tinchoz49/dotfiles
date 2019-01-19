@@ -30,6 +30,7 @@ set clipboard=unnamed,unnamedplus
 set expandtab " Tabs are spaces, not tabs
 set shiftwidth=4 " how many columns text is indented with the reindent operations (<< and >>)
 set softtabstop=4 " number of spaces to use for autoindenting
+set laststatus=2 " for airline
 
 " search on visual selector text
 function! s:VSetSearch(cmdtype)

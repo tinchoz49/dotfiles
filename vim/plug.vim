@@ -3,10 +3,10 @@ call plug#begin('~/.vim/plugged')
 " Fuzzy finder to filter the `fd` result
 Plug 'junegunn/fzf', { 'do': 'sudo pacman -S --noconfirm fzf fd' }
 Plug 'junegunn/fzf.vim'
-map <C-p> :Files<CR>
-map <Leader>p :Commands<CR>
-map <Leader>f :BLines<CR>
-map <Leader>b :Buffers<CR>
+nmap <C-p> :Files<CR>
+nmap <Leader>p :Commands<CR>
+nmap <Leader>f :BLines<CR>
+nmap <Leader>b :Buffers<CR>
 
 " Search plugins
 Plug 'mileszs/ack.vim', { 'do': 'sudo pacman -S --noconfirm ripgrep' }
@@ -42,6 +42,41 @@ endfunction
 " Git support for nerdtree
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
+" Status line with bufferline support
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+let g:airline_theme = 'dracula'
+let g:airline_left_sep = '   '
+let g:airline_right_sep = ' 🟆  '
+let g:airline_section_warning = ''
+let g:airline_section_y = ''
+let g:airline_section_x = ''
+let g:airline_extensions = ['tabline', 'branch', 'ale']
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_mode_map = {
+  \ '__' : '-',
+  \ 'c'  : 'C',
+  \ 'i'  : 'I',
+  \ 'ic' : 'I',
+  \ 'ix' : 'I',
+  \ 'n'  : 'N',
+  \ 'ni' : 'N',
+  \ 'no' : 'N',
+  \ 'R'  : 'R',
+  \ 'Rv' : 'R',
+  \ 's'  : 'S',
+  \ 'S'  : 'S',
+  \ '' : 'S',
+  \ 't'  : 'T',
+  \ 'v'  : 'V',
+  \ 'V'  : 'V',
+  \ '' : 'V',
+  \ }
+
 " Git support in vim
 Plug 'tpope/vim-fugitive'
 " fugitive options: Gdiff split in vertical mode by default
@@ -69,14 +104,8 @@ let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:DevIconsEnableFoldersOpenClose = 1
 let g:DevIconsEnableFolderExtensionPatternMatching = 1
-
-function! MyFiletype()
-    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-endfunction
-
-function! MyFileformat()
-    return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
-endfunction
+let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_enable_airline_statusline = 1
 
 " ALE: Great lint plugin
 Plug 'w0rp/ale', { 'do': 'npm install -g eslint_d' }
@@ -98,70 +127,6 @@ let g:ale_fixers = {
 \}
 nnoremap <C-f> :ALEFix<CR>
 
-" Lightline
-Plug 'itchyny/lightline.vim'
-
-" Lightline ALE
-Plug 'maximbaz/lightline-ale'
-
-" Status line with bufferline support
-Plug 'taohexxx/lightline-buffer'
-" Show full path of filename
-function! FilenameForLightline()
-    return fnamemodify(expand('%'), ":.")
-endfunction
-let g:lightline = {
-            \ 'colorscheme': 'Dracula',
-            \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'fugitive', 'readonly', 'modified', 'filename' ] ],
-            \   'right': [ [ 'lineinfo' ],
-		        \              [ 'percent' ],
-		        \              [ 'fileformat', 'fileencoding', 'filetype' ],
-            \              [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ] ]
-            \ },
-            \ 'component': {
-            \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
-            \   'cap': '%{vimcaps#statusline(-3)}',
-            \   'separator': '',
-            \   'buffers': 'buffers'
-            \ },
-            \ 'component_function': {
-            \   'filename': 'FilenameForLightline',
-            \   'filetype': 'MyFiletype',
-            \   'fileformat': 'MyFileformat',
-            \   'bufferinfo': 'lightline#buffer#bufferinfo'
-            \ },
-            \ 'component_visible_condition': {
-            \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-            \ },
-            \ 'component_expand': {
-            \   'buffercurrent': 'lightline#buffer#buffercurrent',
-            \   'bufferbefore': 'lightline#buffer#bufferbefore',
-            \   'bufferafter': 'lightline#buffer#bufferafter',
-            \   'linter_checking': 'lightline#ale#checking',
-            \   'linter_warnings': 'lightline#ale#warnings',
-            \   'linter_errors': 'lightline#ale#errors',
-            \   'linter_ok': 'lightline#ale#ok'
-            \ },
-            \ 'component_type': {
-            \   'buffercurrent': 'tabsel',
-            \   'bufferbefore': 'raw',
-            \   'bufferafter': 'raw',
-            \   'linter_checking': 'left',
-            \   'linter_warnings': 'warning',
-            \   'linter_errors': 'error',
-            \   'linter_ok': 'left'
-            \ },
-            \ 'tabline': {
-            \   'left': [ [ 'bufferinfo' ],
-            \             [ 'separator' ],
-            \             [ 'bufferbefore', 'buffercurrent', 'bufferafter' ], ],
-            \   'right': [ [ 'buffers' ], ],
-            \ },
-            \ 'tabline_separator': { 'left': '' }
-        \ }
-
 " Emmet suport, remember: <c-z,>,
 Plug 'mattn/emmet-vim'
 let g:user_emmet_leader_key='<C-Z>'
@@ -173,8 +138,6 @@ let g:LanguageClient_serverCommands = {
 \ 'javascript.jsx': ['typescript-language-server', '--stdio']
 \ }
 let g:LanguageClient_diagnosticsEnable = 0
-
-"Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
