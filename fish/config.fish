@@ -23,7 +23,6 @@ set -x EDITOR "nvim"
 #end
 #bass source "$NVM_DIR/nvm.sh"
 
-set -x ANDROID_HOME ~/apps/android/sdk
 set -x GOENV_ROOT ~/.goenv
 set -x GOPATH ~/.gocode
 set -x CARGO ~/.cargo/bin
@@ -34,8 +33,11 @@ set -x NNN_USE_EDITOR 1
 
 set PATH $PATH $CARGO $COMPOSER_BIN $RUBY_BIN $GOPATH/bin $GOENV_ROOT/bin
 
-# android staff
-#set PATH $PATH $JAVA_BIN $ANDROID_HOME/tools $ANDROID_HOME/platform-tools ~/.local/bin
+# android stuff
+set -x ANDROID_HOME ~/apps/android
+set -x ANDROID_NDK_HOME $ANDROID_HOME/ndk-bundle
+set PATH $PATH $JAVA_BIN $ANDROID_HOME/tools $ANDROID_HOME/platform-tools
+#~/.local/bin
 #$ANDROID_HOME/build-tools/25.0.3
 
 #set fish_prompt_pwd_dir_length 3

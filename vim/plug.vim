@@ -108,7 +108,7 @@ let g:webdevicons_enable_airline_tabline = 1
 let g:webdevicons_enable_airline_statusline = 1
 
 " ALE: Great lint plugin
-Plug 'w0rp/ale', { 'do': 'npm install -g eslint_d' }
+Plug 'w0rp/ale', { 'do': 'npm install -g eslint_d write-good' }
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_javascript_eslint_use_global = 1
 let g:ale_javascript_eslint_executable = 'eslint_d'
@@ -133,15 +133,23 @@ let g:user_emmet_leader_key='<C-Z>'
 
 " autocomplete
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+"Plug '~/Downloads/LanguageClient-neovim'
 let g:LanguageClient_serverCommands = {
 \ 'rust': ['rustup', 'run', 'stable', 'rls'],
 \ 'javascript.jsx': ['typescript-language-server', '--stdio']
 \ }
 let g:LanguageClient_diagnosticsEnable = 0
+"let g:LanguageClient_loggingFile =  expand('/tmp/LanguageClient.log')
+"let g:LanguageClient_devel = 1 " Use rust debug build
+"let g:LanguageClient_loggingLevel = 'DEBUG' " Use highest logging level
 
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+Plug 'Shougo/echodoc.vim'
+set noshowmode
+let g:echodoc#enable_at_startup = 1
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 let g:deoplete#enable_at_startup = 1
@@ -153,10 +161,6 @@ set completeopt-=preview
 set completeopt+=menu,menuone,noinsert,noselect
 set shortmess+=c
 set pumheight=15
-
-Plug 'Shougo/echodoc.vim'
-set noshowmode
-let g:echodoc#enable_at_startup = 1
 
 " Create jsdoc
 Plug 'heavenshell/vim-jsdoc'
@@ -198,6 +202,7 @@ let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.erb,*.js'
 " syntax language
 Plug 'sheerun/vim-polyglot'
 Plug 'Quramy/vim-js-pretty-template'
+let g:javascript_plugin_jsdoc = 1
 
 " themes
 Plug 'dracula/vim'
