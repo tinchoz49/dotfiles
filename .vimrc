@@ -1,4 +1,4 @@
-let mapleader=","
+let mapleader=','
 set shell=/bin/bash
 
 source ~/.vim/plug.vim
@@ -7,7 +7,11 @@ set termguicolors
 set mouse=a  " enable mouse
 set mousehide  " hide when characters are typed
 set showtabline=2
+set updatetime=300 " Smaller updatetime for CursorHold & CursorHoldI
+set shortmess+=c
 set signcolumn=yes
+set completeopt=menuone,noinsert,noselect
+set noshowmode
 
 syntax on
 colorscheme dracula
@@ -25,7 +29,6 @@ set nowrap " No wrap long lines
 set number " Line numbers on
 set relativenumber " Relative numbers on
 set hidden " Allow buffer switching without saving
-au BufEnter,FocusGained * checktime
 set clipboard=unnamed,unnamedplus
 set expandtab " Tabs are spaces, not tabs
 set shiftwidth=4 " how many columns text is indented with the reindent operations (<< and >>)
@@ -53,8 +56,15 @@ nnoremap <C-left> :bprevious<CR>
 " fuck you :suspend
 nnoremap <C-z> <nop>
 
-" use hjs extension with haskell syntax
-au BufNewFile,BufRead *.hjs setlocal ft=haskell
+augroup myconfig
+  autocmd!
 
-" Use a VimLeave autocommand to set the cursor style when Nvim exits
-au VimLeave * set guicursor=a:block-blinkon0
+  " Update the editor from remote changes
+  au BufEnter,FocusGained * checktime
+
+  " use hjs extension with haskell syntax
+  au BufNewFile,BufRead *.hjs setlocal ft=haskell
+
+  " Use a VimLeave autocommand to set the cursor style when Nvim exits
+  au VimLeave * set guicursor=a:block-blinkon0
+augroup end

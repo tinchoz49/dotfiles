@@ -1,6 +1,5 @@
 set fish_greeting ''
 alias network:restart 'sudo systemctl restart NetworkManager.service'
-alias vi 'nvim'
 alias vim 'nvim'
 alias am 'atom'
 alias vs 'code'
