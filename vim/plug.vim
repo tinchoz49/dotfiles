@@ -181,9 +181,6 @@ Plug 'dracula/vim'
 Plug 'NLKNguyen/papercolor-theme'
 
 " Start - Intellisense autocomplete
-Plug 'Shougo/echodoc.vim'
-let g:echodoc#enable_at_startup = 1
-
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
 let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'

@@ -38,27 +38,27 @@ URxvt.keysym.C-Down:   font-size:decrease
 URxvt.keysym.F11: perl:fullscreen:switch
 
 URxvt.allow_bold: true
-URxvt*font: xft:MesloLGSDZ Nerd Font:style=Regular:regular:pixelsize=20:antialias=true:hinting=true
-URxvt*boldFont: xft:MesloLGSDZ Nerd Font:style=Bold:bold:pixelsize=20:antialias=true:hinting=true
-URxvt*italicFont: xft:MesloLGSDZ Nerd Font:style=Italic:italic:pixelsize=20:antialias=true:hinting=true
-URxvt*boldItalicFont: xft:MesloLGSDZ Nerd Font:style=Bold Italic:bold:italic:pixelsize=20:antialias=true:hinting=true
+URxvt*font: xft:NotoSansMono Nerd Font:style=Regular:regular:pixelsize=20:antialias=true:hinting=true
+URxvt*boldFont: xft:NotoSansMono Nerd Font:style=Bold:bold:pixelsize=20:antialias=true:hinting=true
+URxvt*italicFont: xft:NotoSansMono Nerd Font:style=Italic:italic:pixelsize=20:antialias=true:hinting=true
+URxvt*boldItalicFont: xft:NotoSansMono Nerd Font:style=Bold Italic:bold:italic:pixelsize=20:antialias=true:hinting=true
 
 ! Dracula Xresources palette
-*.foreground: #F8F8F2
+*.foreground: #e9e9f4
 *.background: #282A36
-*.color0:     #000000
-*.color8:     #4D4D4D
-*.color1:     #FF5555
-*.color9:     #FF6E67
-*.color2:     #50FA7B
-*.color10:    #5AF78E
-*.color3:     #F1FA8C
-*.color11:    #F4F99D
-*.color4:     #BD93F9
-*.color12:    #CAA9FA
-*.color5:     #FF79C6
-*.color13:    #FF92D0
-*.color6:     #8BE9FD
-*.color14:    #9AEDFE
-*.color7:     #BFBFBF
-*.color15:    #E6E6E6
+*.color0:     #282936
+*.color1:     #ea51b2
+*.color2:     #00f769
+*.color3:     #ebff87
+*.color4:     #62d6e8
+*.color5:     #b45bcf
+*.color6:     #a1efe4
+*.color7:     #e9e9f4
+*.color8:     #4d4f68
+*.color9:     #ea51b2
+*.color10:    #00f769
+*.color11:    #ebff87
+*.color12:    #62d6e8
+*.color13:    #b45bcf
+*.color14:    #a1efe4
+*.color15:    #e9e9f4

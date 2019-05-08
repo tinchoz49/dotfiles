@@ -67,7 +67,7 @@ set -x FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
 # spacefish
 set SPACEFISH_PROMPT_ORDER time user dir host git package node rust docker kubecontext exec_time line_sep battery jobs exit_code char
 
-eval (direnv hook fish)
+#eval (direnv hook fish)
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
