@@ -154,10 +154,6 @@ Plug 'tpope/vim-surround'
 " Use the dot key to repeat the last command
 Plug 'tpope/vim-repeat'
 
-" Provides insert mode auto-completion for quotes, parens, brackets
-Plug 'Raimondi/delimitMate'
-let delimitMate_expand_cr = 1
-
 " Editorconfig support for vim
 Plug 'editorconfig/editorconfig-vim'
 
@@ -189,10 +185,6 @@ let g:ale_fixers = {
 \}
 nnoremap <C-f> :ALEFix<CR>
 
-" Emmet suport, remember: <c-z,>,
-Plug 'mattn/emmet-vim'
-let g:user_emmet_leader_key='<C-Z>'
-
 " Create jsdoc
 Plug 'heavenshell/vim-jsdoc'
 nmap <silent> <C-l> <Plug>(jsdoc)
@@ -206,10 +198,6 @@ augroup whitespace
   autocmd!
   autocmd BufWritePre * StripWhitespace
 augroup end
-
-" Match html tags
-Plug 'Valloric/MatchTagAlways'
-let g:mta_filetypes = { 'html' : 1, 'xhtml' : 1, 'xml' : 1 }
 
 " Move your code lines in a cool way
 Plug 'matze/vim-move'
@@ -244,8 +232,9 @@ Plug 'NLKNguyen/papercolor-theme'
 
 " Start - Intellisense autocomplete
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+let g:coc_global_extensions = ['coc-pairs', 'coc-snippets', 'coc-tsserver', 'coc-rls', 'coc-json', 'coc-emmet', 'coc-git']
+"let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+"let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -260,14 +249,14 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> for trigger completion.
+" Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-" Use `[c` and `]c` for navigate diagnostics
+" Use `[c` and `]c` to navigate diagnostics
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
@@ -277,26 +266,52 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use K for show documentation in preview window
+" Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-  if &filetype ==# 'vim'
+  if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
   else
     call CocAction('doHover')
   endif
 endfunction
 
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
 
-augroup autocomplete
-  autocmd!
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " Using CocList
 " Show all diagnostics

@@ -3,19 +3,20 @@ set shell=/bin/bash
 
 source ~/.vim/plug.vim
 
+syntax on
+colorscheme dracula
+set background=dark
+
 set termguicolors
 set mouse=a  " enable mouse
 set mousehide  " hide when characters are typed
 set showtabline=2
 set updatetime=300 " Smaller updatetime for CursorHold & CursorHoldI
-set shortmess+=c
-set signcolumn=yes
+set shortmess+=c " don't give ins-completion-menu messages.
+set signcolumn=yes " always show signcolumns
 set completeopt=menuone,noinsert,noselect
 set noshowmode
-
-syntax on
-colorscheme dracula
-set background=dark
+set cmdheight=2 " Better display for messages
 set lazyredraw
 set nocursorline
 set lazyredraw
