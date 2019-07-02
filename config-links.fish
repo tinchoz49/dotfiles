@@ -9,6 +9,6 @@ set to ~/.config/fish/config.fish ~/.config/omf ~/.config/alacritty/alacritty.ym
 
 for key in $from
   if set -l index (contains -i -- $key $from)
-    ln -s $PWD/$key $to[$index]
+    ln -sf $PWD/$key $to[$index]
   end
 end
