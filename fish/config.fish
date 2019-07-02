@@ -15,13 +15,6 @@ alias cat 'bat'
 set -x VISUAL "nvim"
 set -x NVM_DIR "$HOME/.nvm"
 set -x EDITOR "nvim"
-#function nvm
-    #if test -e "$NVM_DIR/nvm.sh"
-        #bass source "$NVM_DIR/nvm.sh" --no-use ';' nvm $argv
-    #end
-#end
-#bass source "$NVM_DIR/nvm.sh"
-
 set -x GOENV_ROOT ~/.goenv
 set -x GOPATH ~/.gocode
 set -x CARGO ~/.cargo/bin
@@ -38,11 +31,6 @@ set -x ANDROID_NDK_HOME $ANDROID_HOME/ndk-bundle
 set PATH $PATH $JAVA_BIN $ANDROID_HOME/tools $ANDROID_HOME/platform-tools
 #~/.local/bin
 #$ANDROID_HOME/build-tools/25.0.3
-
-#set fish_prompt_pwd_dir_length 3
-#function __parse_current_folder -d "Replace '$HOME' with '~'"
-    #prompt_pwd | sed "s|$HOME|~|"
-#end
 
 function fish_title
     prompt_pwd
@@ -75,3 +63,41 @@ set SPACEFISH_PROMPT_ORDER time user dir host git package node rust docker kubec
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [ -f /home/tincho/projects/geut/wireline/darkstar/node_modules/tabtab/.completions/sls.fish ]; and . /home/tincho/projects/geut/wireline/darkstar/node_modules/tabtab/.completions/sls.fish
+
+# Plugins
+if not functions -q fundle; eval (curl -sfL https://git.io/fundle-install); end
+
+# plugin necessary to work with tmux-zen
+fundle plugin 'oh-my-fish/plugin-config'
+
+fundle plugin 'jethrokuan/fzf'
+fundle plugin 'edc/bass'
+fundle plugin 'FabioAntunes/fish-nvm'
+fundle plugin 'jhillyerd/plugin-git'
+fundle plugin 'sagebind/tmux-zen'
+fundle plugin 'matchai/spacefish'
+
+fundle init
+
+# Style
+set -g fish_color_autosuggestion '555'  'brblack'
+set -g fish_color_cancel -r
+set -g fish_color_command --bold
+set -g fish_color_comment red
+set -g fish_color_cwd green
+set -g fish_color_cwd_root red
+set -g fish_color_end brmagenta
+set -g fish_color_error brred
+set -g fish_color_escape 'bryellow'  '--bold'
+set -g fish_color_history_current --bold
+set -g fish_color_host normal
+set -g fish_color_match --background=brblue
+set -g fish_color_normal normal
+set -g fish_color_operator bryellow
+set -g fish_color_param cyan
+set -g fish_color_quote yellow
+set -g fish_color_redirection brblue
+set -g fish_color_search_match 'bryellow'  '--background=brblack'
+set -g fish_color_selection 'white'  '--bold'  '--background=brblack'
+set -g fish_color_user brgreen
+set -g fish_color_valid_path --underline

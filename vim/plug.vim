@@ -28,7 +28,7 @@ let g:ctrlsf_ackprg = 'rg'
 Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
 
 " Better way to work with copy and paste in vim
-Plug 'svermeulen/vim-easyclip'
+Plug 'svermeulen/vim-easyclip', { 'do': 'sudo pacman -S --noconfirm xclip' }
 
 " Status line with bufferline support
 Plug 'vim-airline/vim-airline'
