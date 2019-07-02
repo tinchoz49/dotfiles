@@ -3,10 +3,6 @@ set shell=/bin/bash
 
 source ~/.vim/plug.vim
 
-syntax on
-colorscheme dracula
-set background=dark
-
 set termguicolors
 set mouse=a  " enable mouse
 set mousehide  " hide when characters are typed

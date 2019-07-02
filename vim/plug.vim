@@ -6,10 +6,15 @@ Plug 'kristijanhusak/defx-icons'
 Plug 'kristijanhusak/defx-git'
 
 " Fuzzy finder
-Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'junegunn/fzf', { 'do': 'sudo pacman -S --noconfirm fzf ripgrep' }
+Plug 'junegunn/fzf.vim'
+nmap <C-p> :Files<CR>
+nmap <Leader>p :Commands<CR>
+nmap <Leader>f :BLines<CR>
+nmap <Leader>b :Buffers<CR>
 
 " Amazing search and replace plugin, the command is: CtrlSF <search_value>
-Plug 'dyng/ctrlsf.vim', { 'do': 'sudo pacman -S --noconfirm ripgrep' }
+Plug 'dyng/ctrlsf.vim'
 let g:ctrlsf_ackprg = 'rg'
 "let g:ctrlsf_extra_backend_args = { 'rg': '--hidden' }
 
@@ -98,8 +103,11 @@ Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
 call plug#end()
 
+syntax on
+colorscheme dracula
+set background=dark
+
 source ~/.vim/plugins/ale.vim
 source ~/.vim/plugins/airline.vim
 source ~/.vim/plugins/coc.vim
 source ~/.vim/plugins/defx.vim
-source ~/.vim/plugins/denite.vim

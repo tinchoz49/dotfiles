@@ -62,7 +62,7 @@ function fishcognito
     env fish_history='' fish
 end
 
-set -x FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
+set -gx FZF_DEFAULT_COMMAND  'rg --files'
 
 # spacefish
 set SPACEFISH_PROMPT_ORDER time user dir host git package node rust docker kubecontext exec_time line_sep battery jobs exit_code char

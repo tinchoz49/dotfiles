@@ -16,6 +16,10 @@ endfu
 autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
   " Define mappings
+  nnoremap <silent><buffer><expr> <2-LeftMouse>
+  \ defx#do_action('drop')
+  nnoremap <silent><buffer><expr> <RightMouse>
+  \ defx#do_action('cd', ['..'])
   nnoremap <silent><buffer><expr> <CR>
   \ defx#do_action('drop')
   nnoremap <silent><buffer><expr> c
