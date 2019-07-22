@@ -1,3 +1,17 @@
+# Plugins
+if not functions -q fundle; eval (curl -sfL https://git.io/fundle-install); end
+
+# plugin necessary to work with tmux-zen
+fundle plugin 'oh-my-fish/plugin-config'
+
+fundle plugin 'jethrokuan/fzf'
+fundle plugin 'jorgebucaran/fish-nvm'
+fundle plugin 'jhillyerd/plugin-git'
+fundle plugin 'sagebind/tmux-zen'
+fundle plugin 'matchai/spacefish'
+
+fundle init
+
 set fish_greeting ''
 alias network:restart 'sudo systemctl restart NetworkManager.service'
 alias vim 'nvim'
@@ -53,31 +67,7 @@ end
 set -gx FZF_DEFAULT_COMMAND  'rg --files'
 
 # spacefish
-set SPACEFISH_PROMPT_ORDER time user dir host git package node rust docker kubecontext exec_time line_sep battery jobs exit_code char
-
-#eval (direnv hook fish)
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[ -f /home/tincho/projects/geut/wireline/darkstar/node_modules/tabtab/.completions/serverless.fish ]; and . /home/tincho/projects/geut/wireline/darkstar/node_modules/tabtab/.completions/serverless.fish
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[ -f /home/tincho/projects/geut/wireline/darkstar/node_modules/tabtab/.completions/sls.fish ]; and . /home/tincho/projects/geut/wireline/darkstar/node_modules/tabtab/.completions/sls.fish
-
-# Plugins
-if not functions -q fundle; eval (curl -sfL https://git.io/fundle-install); end
-
-# plugin necessary to work with tmux-zen
-fundle plugin 'oh-my-fish/plugin-config'
-
-fundle plugin 'jethrokuan/fzf'
-fundle plugin 'edc/bass'
-fundle plugin 'FabioAntunes/fish-nvm'
-fundle plugin 'jhillyerd/plugin-git'
-fundle plugin 'sagebind/tmux-zen'
-fundle plugin 'matchai/spacefish'
-
-fundle init
+set SPACEFISH_PROMPT_ORDER time user dir host git exec_time line_sep battery jobs exit_code char
 
 # Style
 set -g fish_color_autosuggestion '555'  'brblack'

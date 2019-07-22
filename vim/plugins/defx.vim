@@ -5,7 +5,7 @@ nnoremap <silent> <Leader>n :Defx -toggle -split=vertical -winwidth=50 -directio
 augroup defx
     au!
     au VimEnter * sil! au! FileExplorer *
-    au BufEnter * if s:isdir(expand('%')) | bd | exe 'Defx -columns=indent:git:icons:mark:filename:type' | endif
+    au BufEnter * if s:isdir(expand(argv(0))) | bd | exe 'Defx -columns=indent:git:icons:mark:filename:type ' . expand(argv(0)) | endif
 augroup END
 fu! s:isdir(dir) abort
     return !empty(a:dir) && (isdirectory(a:dir) ||

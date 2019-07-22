@@ -1,5 +1,5 @@
 let mapleader=','
-set shell=/bin/bash
+" set shell=/bin/bash
 
 source ~/.vim/plug.vim
 
