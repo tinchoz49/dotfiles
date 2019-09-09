@@ -6,21 +6,16 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+" IDE
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+
 " Defx
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'kristijanhusak/defx-icons'
 Plug 'kristijanhusak/defx-git'
 
-" Fuzzy finder
-Plug 'junegunn/fzf', { 'do': 'sudo pacman -S --noconfirm fzf ripgrep' }
-Plug 'junegunn/fzf.vim'
-nmap <C-p> :Files<CR>
-nmap <Leader>p :Commands<CR>
-nmap <Leader>f :BLines<CR>
-nmap <Leader>b :Buffers<CR>
-
 " Amazing search and replace plugin, the command is: CtrlSF <search_value>
-Plug 'dyng/ctrlsf.vim'
+Plug 'dyng/ctrlsf.vim', { 'do': 'sudo pacman -S --noconfirm ripgrep' }
 let g:ctrlsf_ackprg = 'rg'
 "let g:ctrlsf_extra_backend_args = { 'rg': '--hidden' }
 
@@ -103,9 +98,6 @@ let g:javascript_plugin_jsdoc = 1
 " themes
 Plug 'dracula/vim'
 Plug 'NLKNguyen/papercolor-theme'
-
-" Start - Intellisense autocomplete
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
 call plug#end()
 

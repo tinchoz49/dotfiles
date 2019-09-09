@@ -1,3 +1,8 @@
 {
-  "diagnostic.enable": false
+  "diagnostic.enable": true,
+  "diagnostic.displayByAle": true,
+  "list.source.files.defaultOptions": ["--interactive", "--number-select"],
+  "list.source.files.args": ["--hidden", "--files"],
+  "list.source.commands.defaultOptions": ["--interactive", "--number-select"],
+  "list.source.words.defaultOptions": ["--interactive", "--number-select"]
 }

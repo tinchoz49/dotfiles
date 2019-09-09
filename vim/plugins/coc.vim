@@ -1,4 +1,4 @@
-let g:coc_global_extensions = ['coc-pairs', 'coc-snippets', 'coc-tsserver', 'coc-rls', 'coc-json', 'coc-emmet', 'coc-git']
+let g:coc_global_extensions = ['coc-pairs', 'coc-snippets', 'coc-tsserver', 'coc-rls', 'coc-json', 'coc-emmet', 'coc-git', 'coc-lists']
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -102,3 +102,7 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+nmap <C-p> :CocList files<CR>
+nmap <Leader>p :CocList vimcommands<CR>
+nmap <Leader>w :CocList words<CR>
