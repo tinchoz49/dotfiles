@@ -24,7 +24,7 @@ setopt hist_ignore_all_dups # remove older duplicate entries from history
 setopt hist_reduce_blanks # remove superfluous blanks from history items
 setopt inc_append_history # save history entries as soon as they are entered
 setopt share_history # share history between different instances
-setopt correct_all # autocorrect commands
+unsetopt correct_all
 setopt interactive_comments # allow comments in interactive shells
 zstyle ':completion:*' menu select # select completions with arrow keys
 zstyle ':completion:*' group-name '' # group results by category
@@ -32,15 +32,27 @@ zstyle ':completion:::::' completer _expand _complete _ignored _approximate # en
 
 # Load antibody plugin manager
 source <(antibody init)
+export ANTIBODY_HOME="$HOME/.cache/antibody"
 
 # Plugins
 # oh-my-zsh
+
+# Set ZSH_CACHE_DIR to the path where cache files should be created
+# or else we will use the default cache/
+export ZSH="$ANTIBODY_HOME/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
+export ZSH_CACHE_DIR="$ZSH/cache"
+
 ZSH_TMUX_AUTOSTART=true
 ZSH_TMUX_AUTOQUIT=true
+
 antibody bundle robbyrussell/oh-my-zsh path:plugins/tmux
 antibody bundle robbyrussell/oh-my-zsh path:plugins/node
+antibody bundle robbyrussell/oh-my-zsh path:plugins/npm
 antibody bundle robbyrussell/oh-my-zsh path:plugins/yarn
 antibody bundle robbyrussell/oh-my-zsh path:plugins/git
+antibody bundle robbyrussell/oh-my-zsh path:plugins/fzf
+antibody bundle robbyrussell/oh-my-zsh path:plugins/jump
+antibody bundle robbyrussell/oh-my-zsh path:plugins/shrink-path
 antibody bundle robbyrussell/oh-my-zsh path:lib/key-bindings.zsh
 
 antibody bundle zdharma/fast-syntax-highlighting
@@ -49,12 +61,67 @@ antibody bundle zsh-users/zsh-history-substring-search
 antibody bundle zsh-users/zsh-completions
 antibody bundle marzocchi/zsh-notify
 antibody bundle denysdovhan/spaceship-prompt
-antibody bundle pawel-slowik/zsh-term-title
-
-export NVM_LAZY_LOAD=true
-antibody bundle lukechilds/zsh-nvm
 
 alias vim='nvim'
 alias am='atom'
 alias vs='code'
 alias cat='bat'
+export FZF_DEFAULT_COMMAND='rg --files'
+
+SPACESHIP_PROMPT_ORDER=(
+  time          # Time stamps section
+  user          # Username section
+  dir           # Current directory section
+  host          # Hostname section
+  git           # Git section (git_branch + git_status)
+  exec_time     # Execution time
+  line_sep      # Line break
+  battery       # Battery level and status
+  vi_mode       # Vi-mode indicator
+  jobs          # Background jobs indicator
+  exit_code     # Exit code section
+  char          # Prompt character
+)
+
+# fnm
+export PATH=/home/tincho/.fnm:$PATH
+eval "`fnm env --multi`"
+
+# title
+
+: ${TERM_TITLE_SET_MULTIPLEXER:=1}
+
+function term_set_title() {
+	emulate -L zsh
+	local term_is_known=0 term_is_multi=0
+	if [[ \
+		$TERM == rxvt-unicode*
+		|| $TERM == xterm*
+		|| ! -z $TMUX
+	]] then
+		term_is_known=1
+	fi
+	if [[ ! -z $TMUX ]] then
+		term_is_multi=1
+	fi
+	if [[ $term_is_known -ne 1 ]] then
+		return
+	fi
+	printf '\033]0;%s\007' ${1//[^[:print:]]/}
+	if [[ \
+		$TERM_TITLE_SET_MULTIPLEXER -eq 1
+		&& $term_is_multi -eq 1
+	]] then
+		printf '\033k%s\033\\' ${1//[^[:print:]]/}
+	fi
+}
+
+function term_title() {
+	emulate -L zsh
+	local dir='%~'
+	term_set_title "$(shrink_path -f)"
+}
+
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd term_title
+add-zsh-hook preexec term_title
