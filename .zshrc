@@ -3,14 +3,6 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=$HISTSIZE
 
-# Enable autocompletions
-autoload -Uz compinit
-for dump in ~/.zcompdump(N.mh+24); do
-  compinit
-done
-compinit -C
-zmodload -i zsh/complist
-
 # Options
 setopt hist_ignore_all_dups # remove older duplicate entries from history
 setopt hist_reduce_blanks # remove superfluous blanks from history items
@@ -26,46 +18,71 @@ setopt inc_append_history # save history entries as soon as they are entered
 setopt share_history # share history between different instances
 unsetopt correct_all
 setopt interactive_comments # allow comments in interactive shells
-zstyle ':completion:*' menu select # select completions with arrow keys
-zstyle ':completion:*' group-name '' # group results by category
-zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
+#zstyle ':completion:*' menu select # select completions with arrow keys
+#zstyle ':completion:*' group-name '' # group results by category
+#zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
 
-# Load antibody plugin manager
-source <(antibody init)
-export ANTIBODY_HOME="$HOME/.cache/antibody"
+### Added by Zplugin's installer
+source "$HOME/.zplugin/bin/zplugin.zsh"
+autoload -Uz _zplugin
+(( ${+_comps} )) && _comps[zplugin]=_zplugin
+### End of Zplugin installer's chunk
 
 # Plugins
-# oh-my-zsh
 
-# Set ZSH_CACHE_DIR to the path where cache files should be created
-# or else we will use the default cache/
-export ZSH="$ANTIBODY_HOME/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
-export ZSH_CACHE_DIR="$ZSH/cache"
+# oh-my-zsh
+function omzPlugin() {
+  zplugin ice svn lucid $2
+  zplugin snippet OMZ::plugins/$1
+}
 
 ZSH_TMUX_AUTOSTART=true
 ZSH_TMUX_AUTOQUIT=true
+omzPlugin tmux
+omzPlugin shrink-path
+omzPlugin node wait"1"
+omzPlugin npm wait"1"
+omzPlugin yarn wait"1"
+omzPlugin git wait"1"
+omzPlugin jump
+omzPlugin z
+zplugin snippet OMZ::lib/key-bindings.zsh
 
-antibody bundle robbyrussell/oh-my-zsh path:plugins/tmux
-antibody bundle robbyrussell/oh-my-zsh path:plugins/node
-antibody bundle robbyrussell/oh-my-zsh path:plugins/npm
-antibody bundle robbyrussell/oh-my-zsh path:plugins/yarn
-antibody bundle robbyrussell/oh-my-zsh path:plugins/git
-antibody bundle robbyrussell/oh-my-zsh path:plugins/fzf
-antibody bundle robbyrussell/oh-my-zsh path:plugins/jump
-antibody bundle robbyrussell/oh-my-zsh path:plugins/shrink-path
-antibody bundle robbyrussell/oh-my-zsh path:lib/key-bindings.zsh
+# Additional completion definitions for Zsh
+zplugin ice wait lucid blockf atpull'zplugin creinstall -q .'
+zplugin light zsh-users/zsh-completions
 
-antibody bundle zdharma/fast-syntax-highlighting
-antibody bundle zsh-users/zsh-autosuggestions
-antibody bundle zsh-users/zsh-history-substring-search
-antibody bundle zsh-users/zsh-completions
-antibody bundle marzocchi/zsh-notify
-antibody bundle denysdovhan/spaceship-prompt
+# Autosuggestions & fast-syntax-highlighting
+zplugin ice wait"1" lucid atinit"ZPLGM[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
+zplugin light zdharma/fast-syntax-highlighting
+
+# zsh-autosuggestions
+zplugin ice wait"1" lucid atload"!_zsh_autosuggest_start"
+zplugin load zsh-users/zsh-autosuggestions
+
+# This is a clean-room implementation of the Fish shell's history search feature
+zplugin light zsh-users/zsh-history-substring-search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# zdharma/history-search-multi-word
+zstyle ":history-search-multi-word" page-size "11"
+zplugin ice wait"1" lucid
+zplugin load zdharma/history-search-multi-word
+
+# theme
+zplugin light denysdovhan/spaceship-prompt
 
 alias vim='nvim'
 alias am='atom'
 alias vs='code'
 alias cat='bat'
+alias d='sudo docker'
+alias d:start='sudo systemctl start docker'
+alias d:stop='sudo systemctl stop docker'
+alias d:volume-lso='d volume ls -qf dangling=true'
+alias d:volume-rmo='d volume rm (docker volume ls -qf dangling=true)'
+alias d:container-kall='d stop (docker ps -a -q) && d rm (docker ps -a -q)'
 export FZF_DEFAULT_COMMAND='rg --files'
 
 SPACESHIP_PROMPT_ORDER=(
@@ -94,3 +111,5 @@ function term_title() {
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd term_title
 add-zsh-hook preexec term_title
+
+export PATH=/home/tincho/.nimble/bin:$PATH
