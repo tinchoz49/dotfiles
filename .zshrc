@@ -65,7 +65,7 @@ zplugin light zsh-users/zsh-history-substring-search
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
-# zdharma/history-search-multi-word
+# zdharma/history-search-multi-word. ctrl + r
 zstyle ":history-search-multi-word" page-size "11"
 zplugin ice wait"1" lucid
 zplugin load zdharma/history-search-multi-word
