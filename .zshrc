@@ -70,6 +70,10 @@ zstyle ":history-search-multi-word" page-size "11"
 zplugin ice wait"1" lucid
 zplugin load zdharma/history-search-multi-word
 
+# nvm
+zplugin ice wait"1" lucid
+zplugin light lukechilds/zsh-nvm
+
 # theme
 zplugin light denysdovhan/spaceship-prompt
 
@@ -99,10 +103,6 @@ SPACESHIP_PROMPT_ORDER=(
   exit_code     # Exit code section
   char          # Prompt character
 )
-
-# fnm
-export PATH=/home/tincho/.fnm:$PATH
-eval "`fnm env --multi`"
 
 function term_title() {
   printf '\033]0;%s\007' ${1//[^[:print:]]/} $(shrink_path -f)
