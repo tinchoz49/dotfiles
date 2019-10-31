@@ -1,4 +1,4 @@
-let g:coc_global_extensions = ['coc-pairs', 'coc-snippets', 'coc-tsserver', 'coc-rls', 'coc-json', 'coc-emmet', 'coc-git', 'coc-lists']
+let g:coc_global_extensions = ['coc-pairs', 'coc-snippets', 'coc-tsserver', 'coc-rls', 'coc-json', 'coc-emmet', 'coc-git', 'coc-yank']
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -89,13 +89,14 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
+" Custom
 " Using CocList
 " Show all diagnostics
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions
 nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 " Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <space>c  :<C-u>CocList vimcommands<cr>
 " Find symbol of current document
 nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols
@@ -104,9 +105,9 @@ nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
-nmap <C-p> :CocList files<CR>
-nmap <Leader>p :CocList vimcommands<CR>
-nmap <Leader>w :CocList words<CR>
+" Show files
+nnoremap <silent> <space>p  :<C-u>CocList files<CR>
+" Show words
+nnoremap <silent> <space>w  :<C-u>CocList words<CR>
+" Show yank list
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>

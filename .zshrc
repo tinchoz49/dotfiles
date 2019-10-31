@@ -18,9 +18,10 @@ setopt inc_append_history # save history entries as soon as they are entered
 setopt share_history # share history between different instances
 unsetopt correct_all
 setopt interactive_comments # allow comments in interactive shells
-#zstyle ':completion:*' menu select # select completions with arrow keys
-#zstyle ':completion:*' group-name '' # group results by category
-#zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # autocomplete case insensitive
+zstyle ':completion:*' menu select # select completions with arrow keys
+zstyle ':completion:*' group-name '' # group results by category
+zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
 
 ### Added by Zplugin's installer
 source "$HOME/.zplugin/bin/zplugin.zsh"
@@ -74,9 +75,6 @@ zplugin load zdharma/history-search-multi-word
 zplugin ice wait"1" lucid
 zplugin light lukechilds/zsh-nvm
 
-# theme
-zplugin light denysdovhan/spaceship-prompt
-
 alias vim='nvim'
 alias am='atom'
 alias vs='code'
@@ -89,20 +87,20 @@ alias d:volume-rmo='d volume rm (docker volume ls -qf dangling=true)'
 alias d:container-kall='d stop (docker ps -a -q) && d rm (docker ps -a -q)'
 export FZF_DEFAULT_COMMAND='rg --files'
 
-SPACESHIP_PROMPT_ORDER=(
-  time          # Time stamps section
-  user          # Username section
-  dir           # Current directory section
-  host          # Hostname section
-  git           # Git section (git_branch + git_status)
-  exec_time     # Execution time
-  line_sep      # Line break
-  battery       # Battery level and status
-  vi_mode       # Vi-mode indicator
-  jobs          # Background jobs indicator
-  exit_code     # Exit code section
-  char          # Prompt character
-)
+#SPACESHIP_PROMPT_ORDER=(
+  #time          # Time stamps section
+  #user          # Username section
+  #dir           # Current directory section
+  #host          # Hostname section
+  #git           # Git section (git_branch + git_status)
+  #exec_time     # Execution time
+  #line_sep      # Line break
+  #battery       # Battery level and status
+  #vi_mode       # Vi-mode indicator
+  #jobs          # Background jobs indicator
+  #exit_code     # Exit code section
+  #char          # Prompt character
+#)
 
 function term_title() {
   printf '\033]0;%s\007' ${1//[^[:print:]]/} $(shrink_path -f)
@@ -112,4 +110,5 @@ autoload -Uz add-zsh-hook
 add-zsh-hook precmd term_title
 add-zsh-hook preexec term_title
 
-export PATH=/home/tincho/.nimble/bin:$PATH
+# before: yaourt -S starship-bin
+eval "$(starship init zsh)"
