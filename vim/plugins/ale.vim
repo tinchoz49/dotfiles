@@ -17,3 +17,5 @@ let g:ale_fixers = {
   \ 'html': ['prettier']
 \}
 nnoremap <C-f> :ALEFix<CR>
+nmap <silent> [a <Plug>(ale_previous_wrap)
+nmap <silent> ]a <Plug>(ale_next_wrap)

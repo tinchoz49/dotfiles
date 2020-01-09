@@ -7,14 +7,15 @@ if ( ! test -d ~/.vim); then
   mkdir ~/.vim
 fi
 
-arr["fish/config.fish"]=~/.config/fish/config.fish
+#arr["fish/config.fish"]=~/.config/fish/config.fish
+arr[".zshrc"]=~/.zshrc
 arr["alacritty/alacritty.yml"]=~/.config/alacritty/alacritty.yml
+arr["kitty.conf"]=~/.config/kitty/kitty.conf
 arr[".vimrc"]=~/.vimrc
 arr["vim/plug.vim"]=~/.vim/plug.vim
 arr["vim/plugins"]=~/.vim/plugins
-arr["vim/coc-settings.json"]=~/.vim/coc-settings.json
+arr["vim/coc-settings.json"]=~/.config/nvim/coc-settings.json
 arr[".tmux.conf"]=~/.tmux.conf
-arr[".zshrc"]=~/.zshrc
 
 for from in "${!arr[@]}"
 do

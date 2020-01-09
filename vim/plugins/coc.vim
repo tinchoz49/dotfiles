@@ -1,4 +1,4 @@
-let g:coc_global_extensions = ['coc-pairs', 'coc-snippets', 'coc-tsserver', 'coc-rls', 'coc-json', 'coc-emmet', 'coc-git', 'coc-yank']
+let g:coc_global_extensions = ['coc-lists', 'coc-pairs', 'coc-snippets', 'coc-tsserver', 'coc-rls', 'coc-json', 'coc-emmet', 'coc-git', 'coc-yank']
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -46,10 +46,6 @@ endfunction
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
 
-" Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
@@ -73,9 +69,6 @@ xmap af <Plug>(coc-funcobj-a)
 omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
-" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-nmap <silent> <C-d> <Plug>(coc-range-select)
-xmap <silent> <C-d> <Plug>(coc-range-select)
 
 " Use `:Format` to format current buffer
 command! -nargs=0 Format :call CocAction('format')

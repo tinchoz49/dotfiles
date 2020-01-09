@@ -37,9 +37,9 @@ function omzPlugin() {
   zplugin snippet OMZ::plugins/$1
 }
 
-ZSH_TMUX_AUTOSTART=true
-ZSH_TMUX_AUTOQUIT=true
-omzPlugin tmux
+#ZSH_TMUX_AUTOSTART=true
+#ZSH_TMUX_AUTOQUIT=true
+#omzPlugin tmux
 omzPlugin shrink-path
 omzPlugin node wait"1"
 omzPlugin npm wait"1"
@@ -74,6 +74,10 @@ zplugin load zdharma/history-search-multi-word
 # nvm
 zplugin ice wait"1" lucid
 zplugin light lukechilds/zsh-nvm
+
+# navi
+zplugin ice wait"1" lucid
+zplugin light denisidoro/navi
 
 alias vim='nvim'
 alias am='atom'

@@ -23,7 +23,7 @@ let g:ctrlsf_ackprg = 'rg'
 Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
 
 " Better way to work with copy and paste in vim
-Plug 'svermeulen/vim-easyclip', { 'do': 'sudo pacman -S --noconfirm xclip' }
+Plug 'svermeulen/vim-easyclip', { 'do': 'sudo pacman -S --noconfirm xsel' }
 
 " Status line with bufferline support
 Plug 'vim-airline/vim-airline'
@@ -33,9 +33,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 " fugitive options: Gdiff split in vertical mode by default
 set diffopt+=vertical
-
-" Is all about surroundings: parentheses, brackets, quotes, XML tags, and more.
-Plug 'tpope/vim-surround'
 
 " Use the dot key to repeat the last command
 Plug 'tpope/vim-repeat'
@@ -71,10 +68,6 @@ augroup end
 " Move your code lines in a cool way
 Plug 'matze/vim-move'
 
-" mappings for ex commands
-" ]q is :cnext. [q is :cprevious. ]a is :next. [b is :bprevious
-Plug 'tpope/vim-unimpaired'
-
 " Wipe a file from the buffer and keep the window/split intact
 Plug 'qpkorr/vim-bufkill'
 let g:BufKillCreateMappings = 0
@@ -98,6 +91,7 @@ let g:javascript_plugin_jsdoc = 1
 " themes
 Plug 'dracula/vim'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'connorholyday/vim-snazzy'
 
 call plug#end()
 

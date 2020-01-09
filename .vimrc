@@ -12,7 +12,7 @@ set shortmess+=c " don't give ins-completion-menu messages.
 set signcolumn=yes " always show signcolumns
 set completeopt=menuone,noinsert,noselect
 set noshowmode
-set cmdheight=2 " Better display for messages
+set cmdheight=1 " Better display for messages
 set lazyredraw
 set nocursorline
 set lazyredraw
@@ -31,6 +31,7 @@ set expandtab " Tabs are spaces, not tabs
 set shiftwidth=4 " how many columns text is indented with the reindent operations (<< and >>)
 set softtabstop=4 " number of spaces to use for autoindenting
 set laststatus=2 " for airline
+set nofoldenable " disable folding
 
 " search on visual selector text
 function! s:VSetSearch(cmdtype)
@@ -52,6 +53,9 @@ nnoremap <C-left> :bprevious<CR>
 
 " fuck you :suspend
 nnoremap <C-z> <nop>
+
+nnoremap ]q :cnext<CR>
+nnoremap [q :cprevious<CR>
 
 augroup myconfig
   autocmd!
