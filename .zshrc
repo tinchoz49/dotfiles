@@ -31,15 +31,18 @@ autoload -Uz _zplugin
 
 # Plugins
 
+ZINIT[OPTIMIZE_OUT_DISK_ACCESSES]=1
+
 # oh-my-zsh
 function omzPlugin() {
-  zplugin ice svn lucid $2
-  zplugin snippet OMZ::plugins/$1
+  zinit ice svn lucid $2
+  zinit snippet OMZ::plugins/$1
 }
 
-#ZSH_TMUX_AUTOSTART=true
-#ZSH_TMUX_AUTOQUIT=true
-#omzPlugin tmux
+ZSH_TMUX_AUTOSTART=false
+ZSH_TMUX_AUTOCONNECT=false
+ZSH_TMUX_AUTOQUIT=true
+omzPlugin tmux
 omzPlugin shrink-path
 omzPlugin node wait"1"
 omzPlugin npm wait"1"
@@ -47,39 +50,40 @@ omzPlugin yarn wait"1"
 omzPlugin git wait"1"
 omzPlugin jump
 omzPlugin z
-zplugin snippet OMZ::lib/key-bindings.zsh
+zinit snippet OMZ::lib/key-bindings.zsh
 
 # Additional completion definitions for Zsh
-zplugin ice wait lucid blockf atpull'zplugin creinstall -q .'
-zplugin light zsh-users/zsh-completions
+zinit ice wait lucid blockf atpull'zinit creinstall -q .'
+zinit light zsh-users/zsh-completions
 
 # Autosuggestions & fast-syntax-highlighting
-zplugin ice wait"1" lucid atinit"ZPLGM[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
-zplugin light zdharma/fast-syntax-highlighting
+zinit ice wait lucid atinit"zpcompinit; zpcdreplay"
+zinit light zdharma/fast-syntax-highlighting
 
 # zsh-autosuggestions
-zplugin ice wait"1" lucid atload"!_zsh_autosuggest_start"
-zplugin load zsh-users/zsh-autosuggestions
+zinit ice wait lucid atload"!_zsh_autosuggest_start"
+zinit load zsh-users/zsh-autosuggestions
 
 # This is a clean-room implementation of the Fish shell's history search feature
-zplugin light zsh-users/zsh-history-substring-search
+zinit light zsh-users/zsh-history-substring-search
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
 # zdharma/history-search-multi-word. ctrl + r
 zstyle ":history-search-multi-word" page-size "11"
-zplugin ice wait"1" lucid
-zplugin load zdharma/history-search-multi-word
+zinit ice wait"1" lucid
+zinit load zdharma/history-search-multi-word
 
 # nvm
-zplugin ice wait"1" lucid
-zplugin light lukechilds/zsh-nvm
+zinit ice wait"1" lucid
+zinit light lukechilds/zsh-nvm
 
 # navi
-zplugin ice wait"1" lucid
-zplugin light denisidoro/navi
+zinit ice wait"1" lucid
+zinit light denisidoro/navi
 
 alias vim='nvim'
+alias onivim='~/apps/onivim.AppImage'
 alias am='atom'
 alias vs='code'
 alias cat='bat'
@@ -89,6 +93,7 @@ alias d:stop='sudo systemctl stop docker'
 alias d:volume-lso='d volume ls -qf dangling=true'
 alias d:volume-rmo='d volume rm (docker volume ls -qf dangling=true)'
 alias d:container-kall='d stop (docker ps -a -q) && d rm (docker ps -a -q)'
+alias browser-runner='node ~/projects/dxos/browser-runner/bin/cli.js'
 export FZF_DEFAULT_COMMAND='rg --files'
 
 #SPACESHIP_PROMPT_ORDER=(
