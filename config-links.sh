@@ -10,7 +10,7 @@ fi
 #arr["fish/config.fish"]=~/.config/fish/config.fish
 arr[".zshrc"]=~/.zshrc
 arr["alacritty/alacritty.yml"]=~/.config/alacritty/alacritty.yml
-arr["kitty.conf"]=~/.config/kitty/kitty.conf
+#arr["kitty.conf"]=~/.config/kitty/kitty.conf
 arr[".vimrc"]=~/.vimrc
 arr["vim/plug.vim"]=~/.vim/plug.vim
 arr["vim/plugins"]=~/.vim/plugins

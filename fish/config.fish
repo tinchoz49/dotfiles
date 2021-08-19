@@ -1,22 +1,12 @@
-# Plugins
-if not functions -q fundle; eval (curl -sfL https://git.io/fundle-install); end
-
-# plugin necessary to work with tmux-zen
-fundle plugin 'oh-my-fish/plugin-config'
-
-fundle plugin 'jethrokuan/fzf'
-fundle plugin 'jorgebucaran/fish-nvm'
-fundle plugin 'jhillyerd/plugin-git'
-fundle plugin 'sagebind/tmux-zen'
-fundle plugin 'matchai/spacefish'
-
-fundle init
+if status is-interactive
+    # Commands to run in interactive sessions can go here
+end
 
 set fish_greeting ''
 alias network:restart 'sudo systemctl restart NetworkManager.service'
 alias vim 'nvim'
 alias am 'atom'
-alias vs 'code'
+alias vs 'codium'
 alias docker:start 'sudo systemctl start docker'
 alias docker:stop 'sudo systemctl stop docker'
 alias docker:volume-lso 'docker volume ls -qf dangling=true'
@@ -26,18 +16,15 @@ alias docker:node-box 'docker run --rm -v $PWD:/src -w /src -u node -it node bas
 alias rn:reload 'adb connect (adb shell ip route | awk \'{print $9}\'); adb shell input keyevent 82; adb shell input keyevent 23; adb shell input keyevent 23';
 alias cat 'bat'
 
+set -x SHELL "/bin/fish"
 set -x VISUAL "nvim"
 set -x NVM_DIR "$HOME/.nvm"
 set -x EDITOR "nvim"
-set -x GOENV_ROOT ~/.goenv
-set -x GOPATH ~/.gocode
 set -x CARGO ~/.cargo/bin
-set -x COMPOSER_BIN ~/.config/composer/vendor/bin
-set -x RUBY_BIN ~/.gem/ruby/2.3.0/bin
 set -x JAVA_BIN /usr/lib/jvm/java-8-openjdk/bin
 set -x NNN_USE_EDITOR 1
 
-set PATH $PATH $CARGO $COMPOSER_BIN $RUBY_BIN $GOPATH/bin $GOENV_ROOT/bin
+set PATH $PATH $CARGO
 
 # android stuff
 set -x ANDROID_HOME ~/apps/android
@@ -64,10 +51,7 @@ function fishcognito
     env fish_history='' fish
 end
 
-set -gx FZF_DEFAULT_COMMAND  'rg --files'
-
-# spacefish
-set SPACEFISH_PROMPT_ORDER time user dir host git exec_time line_sep battery jobs exit_code char
+set --export FZF_DEFAULT_COMMAND  'rg --files'
 
 # Style
 set -g fish_color_autosuggestion '555'  'brblack'
@@ -91,3 +75,5 @@ set -g fish_color_search_match 'bryellow'  '--background=brblack'
 set -g fish_color_selection 'white'  '--bold'  '--background=brblack'
 set -g fish_color_user brgreen
 set -g fish_color_valid_path --underline
+
+starship init fish | source

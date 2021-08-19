@@ -23,18 +23,18 @@ zstyle ':completion:*' menu select # select completions with arrow keys
 zstyle ':completion:*' group-name '' # group results by category
 zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
 
-### Added by Zplugin's installer
-source "$HOME/.zplugin/bin/zplugin.zsh"
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
-### End of Zplugin installer's chunk
+### Added by zinit's installer
+source ~/.zinit/bin/zinit.zsh
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+### End of zinit installer's chunk
 
 # Plugins
 
 ZINIT[OPTIMIZE_OUT_DISK_ACCESSES]=1
 
 # oh-my-zsh
-function omzPlugin() {
+function omzInit() {
   zinit ice svn lucid $2
   zinit snippet OMZ::plugins/$1
 }
@@ -42,14 +42,14 @@ function omzPlugin() {
 ZSH_TMUX_AUTOSTART=false
 ZSH_TMUX_AUTOCONNECT=false
 ZSH_TMUX_AUTOQUIT=true
-omzPlugin tmux
-omzPlugin shrink-path
-omzPlugin node wait"1"
-omzPlugin npm wait"1"
-omzPlugin yarn wait"1"
-omzPlugin git wait"1"
-omzPlugin jump
-omzPlugin z
+omzInit tmux
+omzInit shrink-path
+omzInit node wait"1"
+omzInit npm wait"1"
+omzInit yarn wait"1"
+omzInit git wait"1"
+omzInit jump
+omzInit z
 zinit snippet OMZ::lib/key-bindings.zsh
 
 # Additional completion definitions for Zsh
@@ -83,17 +83,24 @@ zinit ice wait"1" lucid
 zinit light denisidoro/navi
 
 alias vim='nvim'
-alias onivim='~/apps/onivim.AppImage'
+alias oni='~/apps/Onivim2-x86_64-master.AppImage'
 alias am='atom'
-alias vs='code'
+alias vs='codium'
+# alias vs='code'
 alias cat='bat'
-alias d='sudo docker'
+alias d='docker'
 alias d:start='sudo systemctl start docker'
 alias d:stop='sudo systemctl stop docker'
 alias d:volume-lso='d volume ls -qf dangling=true'
 alias d:volume-rmo='d volume rm (docker volume ls -qf dangling=true)'
 alias d:container-kall='d stop (docker ps -a -q) && d rm (docker ps -a -q)'
 alias browser-runner='node ~/projects/dxos/browser-runner/bin/cli.js'
+alias fakevideo='sudo modprobe v4l2loopback video_nr=10 card_label="OBSVideoSource" exclusive_caps=1'
+alias v='~/projects/tinchoz49/v/v'
+alias zig='~/apps/zig/zig'
+alias brode='~/projects/geut/brode/packages/brode/bin/brode.js'
+alias brout='~/projects/geut/brode/packages/brout/bin/brout.js'
+alias chan='~/projects/geut/chan/packages/chan/bin/chan.js'
 export FZF_DEFAULT_COMMAND='rg --files'
 
 #SPACESHIP_PROMPT_ORDER=(
