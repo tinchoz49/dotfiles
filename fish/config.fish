@@ -23,8 +23,10 @@ set -x EDITOR "nvim"
 set -x CARGO ~/.cargo/bin
 set -x JAVA_BIN /usr/lib/jvm/java-8-openjdk/bin
 set -x NNN_USE_EDITOR 1
-
-set PATH $PATH $CARGO
+set -gx PNPM_HOME "$HOME/.local/share/pnpm"
+# set -x ZIG ~/Applications/zig
+# set -x ZLS ~/Applications/zls
+set PATH $PATH $CARGO $PNPM_HOME
 
 # android stuff
 set -x ANDROID_HOME ~/apps/android
@@ -75,5 +77,9 @@ set -g fish_color_search_match 'bryellow'  '--background=brblack'
 set -g fish_color_selection 'white'  '--bold'  '--background=brblack'
 set -g fish_color_user brgreen
 set -g fish_color_valid_path --underline
+
+# tabtab source for packages
+# uninstall by removing these lines
+[ -f ~/.config/tabtab/fish/__tabtab.fish ]; and . ~/.config/tabtab/fish/__tabtab.fish; or true
 
 starship init fish | source
