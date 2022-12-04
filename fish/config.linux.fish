@@ -6,6 +6,7 @@ set fish_greeting ''
 alias network:restart 'sudo systemctl restart NetworkManager.service'
 alias vim 'nvim'
 alias am 'atom'
+# alias vs 'codium --enable-features=UseOzonePlatform --ozone-platform=wayland >/dev/null 2>/dev/null'
 alias vs 'codium'
 alias docker:start 'sudo systemctl start docker'
 alias docker:stop 'sudo systemctl stop docker'
@@ -24,14 +25,15 @@ set -x CARGO ~/.cargo/bin
 set -x JAVA_BIN /usr/lib/jvm/java-8-openjdk/bin
 set -x NNN_USE_EDITOR 1
 set -gx PNPM_HOME "$HOME/.local/share/pnpm"
-# set -x ZIG ~/Applications/zig
-# set -x ZLS ~/Applications/zls
-set PATH $PATH $CARGO $PNPM_HOME
+set -x ZIG ~/Applications/zig-linux-x86_64-0.10.0
+set -x ZLS ~/Applications/zls/zig-out/bin
+set PATH $PATH $CARGO $PNPM_HOME $ZIG $ZLS
 
 # android stuff
 set -x ANDROID_HOME ~/apps/android
 set -x ANDROID_NDK_HOME $ANDROID_HOME/ndk-bundle
-set PATH $PATH $JAVA_BIN $ANDROID_HOME/tools $ANDROID_HOME/platform-tools
+set -x FLYCTL_INSTALL /home/tincho/.fly
+set PATH $PATH $JAVA_BIN $ANDROID_HOME/tools $ANDROID_HOME/platform-tools $FLYCTL_INSTALL/bin
 #~/.local/bin
 #$ANDROID_HOME/build-tools/25.0.3
 
@@ -83,3 +85,6 @@ set -g fish_color_valid_path --underline
 [ -f ~/.config/tabtab/fish/__tabtab.fish ]; and . ~/.config/tabtab/fish/__tabtab.fish; or true
 
 starship init fish | source
+# Bun
+set -Ux BUN_INSTALL "/home/tincho/.bun"
+set -px --path PATH "/home/tincho/.bun/bin"
